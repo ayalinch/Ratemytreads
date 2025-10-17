@@ -1,13 +1,29 @@
-import os, json, zipfile, re, textwrap
+import os, zipfile, textwrap, json
 
 root = "/mnt/data/ratemytreads_site"
 
+# Extend styles with KITE blue and dark footer utilities
 styles_path = os.path.join(root, "assets", "styles.css")
 with open(styles_path, "a") as f:
-    f.write("\n/* Vibe tweaks */\n.rounded-3xl{border-radius:1.5rem}\n.card-overlay:before{content:'';position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.5), rgba(0,0,0,.1) 60%, rgba(0,0,0,0));}\n.headline{font-weight:800;letter-spacing:-0.02em;}\n.kicker{font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;color:rgb(100,116,139)}\n.arrow-link{display:inline-flex;align-items:center;gap:.5rem}\n.arrow-link svg{transition:transform .15s ease}\n.arrow-link:hover svg{transform:translateX(4px)}\n")
+    f.write("""
+:root{ --kite-blue:0022e3; }
+.btn-kite{ background:var(--kite-blue); color:#fff; }
+.btn-kite:hover{ filter:brightness(.95); }
+.text-kite{ color:var(--kite-blue); }
+.bg-kite{ background:var(--kite-blue); }
+.footer-dark{ background:#121418; color:#E6E8ED; }
+.footer-dark .muted{ color:#AAB1BD; }
+.card-news{ position:relative; overflow:hidden; border-radius:1.25rem; }
+.card-news figure{ height:14rem; }
+.card-news img{ width:100%; height:100%; object-fit:cover; display:block; }
+.card-news .logo{ height:22px; opacity:.95; }
+.card-news .more{ color:var(--kite-blue); font-weight:700; display:inline-flex; align-items:center; gap:.4rem; }
+.card-news .more svg{ width:16px; height:16px; }
+    """)
 
+# Overwrite index.html with tighter copy + news section + colorful end band
 index_path = os.path.join(root, "index.html")
-index_html = """
+index_html = f"""
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,20 +40,19 @@ index_html = """
         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="1.5" d="M12 3v3m7 5-4 7H9l-4-7m14 0H5m14 0-2-5M5 11l2-5" /></svg>
         <span class="font-semibold">RateMyTreads</span>
       </a>
-      <a href="ratings.html" class="ml-auto font-semibold hover:text-blue-700">Footwear Ratings</a>
+      <a href="ratings.html" class="ml-auto font-semibold hover:text-kite">Footwear Ratings</a>
     </div>
   </nav>
 
-  <!-- Split hero like MaRS: big headline left, rounded media pane right -->
+  <!-- Split hero (short copy) -->
   <header class="max-w-7xl mx-auto px-6 py-12">
     <div class="grid md:grid-cols-2 gap-8 items-center">
       <div>
-        <h1 class="headline text-5xl md:text-6xl tracking-tight">We turn ice traction data into simple footwear scores</h1>
-        <p class="mt-4 text-lg text-slate-700">As a transparent testing group, we measure traction on cold and wet ice, then translate those measurements into easy 1–3 snowflake ratings shoppers can trust.</p>
-        <div class="mt-6">
-          <a class="arrow-link font-semibold text-blue-700" href="#learn">Learn more
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5l7 7-7 7" stroke-width="1.5"/></svg>
-          </a>
+        <h1 class="headline text-5xl md:text-6xl tracking-tight">Simple, trustworthy ice traction scores</h1>
+        <p class="mt-3 text-lg text-slate-700">Tested on cold & wet ice. Shown as 1–3 snowflakes.</p>
+        <div class="mt-6 flex gap-3">
+          <a class="btn-kite px-5 py-3 rounded-lg font-semibold" href="ratings.html">Explore Ratings</a>
+          <a class="border border-slate-300 px-5 py-3 rounded-lg font-semibold" href="#learn">How it works</a>
         </div>
       </div>
       <div class="rounded-3xl overflow-hidden shadow-lg">
@@ -49,33 +64,33 @@ index_html = """
   </header>
 
   <main class="max-w-7xl mx-auto px-6 space-y-16">
-    <!-- Large image panels explaining How testing and How ranking -->
+    <!-- How we test / How we rank (minimal wording) -->
     <section id="learn" class="grid md:grid-cols-2 gap-8">
       <article class="relative rounded-3xl overflow-hidden shadow-lg">
         <img src="https://images.unsplash.com/photo-1562119250-0b2f1eed5f18?q=80&w=1600&auto=format&fit=crop" class="w-full h-96 object-cover" alt="Testing on ice">
         <div class="card-overlay"></div>
         <div class="absolute bottom-0 p-6 text-white">
-          <div class="kicker">How testing is done</div>
-          <h3 class="headline text-3xl mt-1">We measure MAA on cold & wet ice</h3>
-          <p class="mt-2 max-w-xl text-slate-100">Both ascent and descent. We convert MAA → COF using <code>tan(MAA)</code> so every score maps to a real coefficient of friction.</p>
+          <div class="kicker">Testing</div>
+          <h3 class="headline text-3xl mt-1">MAA on cold & wet ice</h3>
+          <p class="mt-2 max-w-xl text-slate-100">Ascent + descent. COF = tan(MAA).</p>
         </div>
       </article>
       <article class="relative rounded-3xl overflow-hidden shadow-lg">
         <img src="https://images.unsplash.com/photo-1617134468423-6f579a6561d2?q=80&w=1600&auto=format&fit=crop" class="w-full h-96 object-cover" alt="Ranking explanation">
         <div class="card-overlay"></div>
         <div class="absolute bottom-0 p-6 text-white">
-          <div class="kicker">How ranking is done</div>
-          <h3 class="headline text-3xl mt-1">1–3 snowflakes from COF</h3>
-          <p class="mt-2">❄ Basic traction &nbsp; ❄❄ Everyday winter &nbsp; ❄❄❄ High traction / spikes</p>
+          <div class="kicker">Ranking</div>
+          <h3 class="headline text-3xl mt-1">1–3 snowflakes</h3>
+          <p class="mt-2">❄ Basic · ❄❄ Everyday · ❄❄❄ High traction</p>
         </div>
       </article>
     </section>
 
-    <!-- View options cards (big rounded tiles) -->
+    <!-- View options (category tiles) -->
     <section>
       <div class="flex items-center justify-between mb-6">
         <h2 class="headline text-3xl">View options</h2>
-        <a href="ratings.html" class="arrow-link font-semibold">See all ratings
+        <a href="ratings.html" class="arrow-link font-semibold text-kite">See all
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5l7 7-7 7" stroke-width="1.5"/></svg>
         </a>
       </div>
@@ -84,7 +99,7 @@ index_html = """
           <img src="https://images.unsplash.com/photo-1542219550-87d6c4f3b6b0?q=80&w=1600&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Casual">
           <div class="card-overlay"></div>
           <div class="absolute bottom-0 p-6 text-white">
-            <h3 class="headline text-2xl">Casual Footwear</h3>
+            <h3 class="headline text-2xl">Casual</h3>
             <div class="opacity-90">Sidewalks & slush</div>
           </div>
         </a>
@@ -101,50 +116,103 @@ index_html = """
           <div class="card-overlay"></div>
           <div class="absolute bottom-0 p-6 text-white">
             <h3 class="headline text-2xl">Spikes</h3>
-            <div class="opacity-90">Traction for ice trails</div>
+            <div class="opacity-90">Trails & ice</div>
           </div>
         </a>
       </div>
     </section>
+
+    <!-- Latest News (blue accents) -->
+    <section>
+      <h2 class="headline text-3xl mb-6">Latest News</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="card-news border shadow-soft">
+          <figure><img src="https://images.unsplash.com/photo-1542574271-7f3b92e6c821?q=80&w=1600&auto=format&fit=crop" alt="CBC marketplace"/></figure>
+          <div class="p-5 space-y-3">
+            <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/c/c0/CBC_Logo_1992-Present.svg" alt="CBC logo">
+            <h3 class="text-xl font-extrabold">Marketplace: which boots will keep you winter safe?</h3>
+            <a class="more" href="#" target="_blank">More info
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5l7 7-7 7" stroke-width="1.5"/></svg>
+            </a>
+          </div>
+        </article>
+        <article class="card-news border shadow-soft">
+          <figure><img src="https://images.unsplash.com/photo-1513438205128-16af156b016a?q=80&w=1600&auto=format&fit=crop" alt="Health tech"/></figure>
+          <div class="p-5 space-y-3">
+            <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/4/4e/CBC_News_Logo.svg" alt="CBC News logo">
+            <h3 class="text-xl font-extrabold">Vital signs: winter footwear traction in the spotlight</h3>
+            <a class="more" href="#" target="_blank">More info
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5l7 7-7 7" stroke-width="1.5"/></svg>
+            </a>
+          </div>
+        </article>
+        <article class="card-news border shadow-soft">
+          <figure><img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1600&auto=format&fit=crop" alt="Zoomer guide"/></figure>
+          <div class="p-5 space-y-3">
+            <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Zoomer_logo.svg" alt="Zoomer">
+            <h3 class="text-xl font-extrabold">Everything Zoomer guide to winter boots</h3>
+            <a class="more" href="#" target="_blank">More info
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5l7 7-7 7" stroke-width="1.5"/></svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
 
-  <footer class="mt-16 border-t">
-    <div class="max-w-7xl mx-auto px-6 py-8 text-sm text-slate-600">
-      © <span id="y"></span> RateMyTreads. All rights reserved.
+  <!-- Colorful end band inspired by the reference "third image" -->
+  <section class="footer-dark mt-16">
+    <div class="max-w-7xl mx-auto px-6 py-12 space-y-10">
+      <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Rate_My_Treads_logo.png" alt="Rate My Treads" class="h-10 hidden" />
+        <h3 class="text-2xl font-extrabold">Subscribe for updates</h3>
+        <div class="flex-1"></div>
+        <form onsubmit="event.preventDefault();" class="flex w-full md:w-auto gap-3">
+          <input placeholder="Name" class="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/60 w-full md:w-56">
+          <input placeholder="Email" type="email" class="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/60 w-full md:w-64">
+          <button class="btn-kite px-5 py-2 rounded-lg font-semibold">Subscribe</button>
+        </form>
+      </div>
+
+      <p class="muted text-sm">Information here is for awareness and not a substitute for professional advice. Boots are tested in new condition.</p>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div>
+          <h4 class="font-semibold mb-2">Contact</h4>
+          <div class="muted text-sm space-y-1">
+            <div>Phone: (416) 597‑3422 x7227</div>
+            <div>Email: ratemytreads@uhn.ca</div>
+            <div>Address: 550 University Ave, Toronto, ON</div>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-2">KITE @ UHN</h4>
+          <ul class="muted text-sm space-y-1">
+            <li><a href="#" class="hover:text-white">About KITE</a></li>
+            <li><a href="#" class="hover:text-white">Facilities</a></li>
+            <li><a href="#" class="hover:text-white">Virtual Tour</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-2">WinterLab Photos</h4>
+          <div class="grid grid-cols-4 gap-2">
+            {"".join([f'<img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=400&auto=format&fit=crop" class="rounded-md h-16 w-full object-cover" alt="">' for _ in range(8)])}
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-4 text-sm muted">© <span id="y"></span> RateMyTreads. All rights reserved.</div>
     </div>
-  </footer>
+  </section>
+
   <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>
 """
 open(index_path, "w").write(index_html)
 
-# Update ratings.html to support URL prefilter and apply card style
-ratings_path = os.path.join(root, "ratings.html")
-ratings = open(ratings_path).read()
-ratings = ratings.replace(
-  '<div id="grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>',
-  '<div id="grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>'
-)
-ratings = ratings.replace(
-  "renderTiles(); renderGrid(); renderTray();",
-  """
-  // Apply prefilter from URL (?category=work&gender=Men&rating=2)
-  const params = new URLSearchParams(location.search);
-  ['category','gender','rating'].forEach(k => {
-    if (params.has(k)) {
-      state[k] = k==='rating' ? Number(params.get(k)) : params.get(k);
-      const chip = document.querySelector(`.chip[data-filter=\"${k}\"][data-value=\"${params.get(k)}\"]`);
-      if (chip) { chip.classList.add('active'); }
-    }
-  });
-  renderTiles(); renderGrid(); renderTray();
-  """
-)
-open(ratings_path, "w").write(ratings)
-
-# Zip the updated site
-zip_path = "/mnt/data/ratemytreads_site_mars_vibe.zip"
+# Re-zip
+zip_path = "/mnt/data/ratemytreads_site_kite_blue.zip"
 with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
     for folder, _, files in os.walk(root):
         for f in files:
