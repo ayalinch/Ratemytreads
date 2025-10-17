@@ -2,12 +2,10 @@ import os, json, zipfile, re, textwrap
 
 root = "/mnt/data/ratemytreads_site"
 
-# Update styles for bigger radii and overlay utilities
 styles_path = os.path.join(root, "assets", "styles.css")
 with open(styles_path, "a") as f:
     f.write("\n/* Vibe tweaks */\n.rounded-3xl{border-radius:1.5rem}\n.card-overlay:before{content:'';position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.5), rgba(0,0,0,.1) 60%, rgba(0,0,0,0));}\n.headline{font-weight:800;letter-spacing:-0.02em;}\n.kicker{font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;color:rgb(100,116,139)}\n.arrow-link{display:inline-flex;align-items:center;gap:.5rem}\n.arrow-link svg{transition:transform .15s ease}\n.arrow-link:hover svg{transform:translateX(4px)}\n")
 
-# Overwrite index.html with a MaRS-style split hero and big cards
 index_path = os.path.join(root, "index.html")
 index_html = """
 <!DOCTYPE html>
