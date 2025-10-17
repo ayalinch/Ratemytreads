@@ -6,13 +6,18 @@
   <title>How We Test | RateMyTreads</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-  <style>
+<style>
   .hero-bg {
+    background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/winterlab.jpg');
     background-size: cover;
     background-position: center;
-    animation: heroSlide 20s infinite linear;
+    filter: blur(3px) brightness(0.8);
   }
 
+  .measure {
+    max-width: 70ch;
+  }
+</style>
   @keyframes heroSlide {
     0%, 20% {
       background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/landing-banner-01.jpg');
