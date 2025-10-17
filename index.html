@@ -8,181 +8,120 @@
   <style>
     html { scroll-behavior: smooth; }
     .hero-bg { background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/winterlab.jpg'); }
-    .card-bg-casual { background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Casual.jpeg'); }
-    .card-bg-work   { background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Safety.jpeg'); }
-    .card-bg-spikes { background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Spike.jpeg'); }
     .bg-cover-center { background-size: cover; background-position: center; }
+
+/* Tier accent strip uses CSS variables for exact color */
+.tier-strip { height: 4px; background-color: var(--tier); }
+
+/* soft tinted backgrounds that match the legend wedges */
+.tier-vh { --tier:#166534; }      /* dark green (Very High) */
+.tier-hi { --tier:#22c55e; }      /* green (High) */
+.tier-med{ --tier:#f59e0b; }      /* amber (Medium) */
+.tier-low{ --tier:#dc2626; }      /* red (Low) */
   </style>
 </head>
+
 <body class="bg-white text-gray-800 font-sans">
-  <!-- Nav -->
-  <header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
-    <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-      <a href="#" class="text-xl font-black tracking-tight">RateMyTreads</a>
-      <div class="hidden sm:flex items-center gap-6 text-sm font-medium">
-        <a href="#ratings" class="hover:text-black/70">Ratings</a>
-        <a href="how-we-test.html" class="hover:text-black/70">How We Test</a>
-        <a href="#news" class="hover:text-black/70">News</a>
-        <a href="#about" class="hover:text-black/70">About</a>
-      </div>
-    </nav>
-  </header>
 
-  <!-- Hero -->
-  <section class="hero-bg bg-cover-center min-h-[80vh] flex items-center justify-center relative mt-16">
-    <div class="absolute inset-0 bg-black/40"></div>
-    <div class="relative z-10 text-center text-white px-6">
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">Real-World Winter Footwear Ratings</h1>
-      <p class="mt-4 max-w-2xl mx-auto text-lg sm:text-xl">Simple. Visual. Evidence-informed rankings so you can stay upright on ice.</p>
-      <a href="#ratings" class="inline-block mt-8 px-6 py-3 rounded-2xl bg-white text-gray-900 font-semibold shadow hover:shadow-lg">Browse Ratings</a>
+<!-- ---------- Nav ---------- -->
+<header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
+  <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+    <a href="#" class="text-xl font-black tracking-tight">RateMyTreads</a>
+    <div class="hidden sm:flex items-center gap-6 text-sm font-medium">
+      <a href="#ratings" class="hover:text-black/70">Ratings</a>
+      <a href="how-we-test.html" class="hover:text-black/70">How We Test</a>
+      <a href="#news" class="hover:text-black/70">News</a>
+      <a href="#about" class="hover:text-black/70">About</a>
     </div>
-  </section>
+  </nav>
+</header>
 
-  <!-- Ratings -->
-  <section id="ratings" class="py-16 sm:py-20">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-center text-3xl sm:text-4xl font-extrabold">Footwear Ratings</h2>
-      <p class="text-center mt-2 text-gray-600">Pick a category to see shoe lists and scores.</p>
+<!-- ---------- Hero ---------- -->
+<section class="hero-bg bg-cover-center min-h-[80vh] flex items-center justify-center relative mt-16">
+  <div class="absolute inset-0 bg-black/40"></div>
+  <div class="relative z-10 text-center text-white px-6">
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">Real-World Winter Footwear Ratings</h1>
+    <p class="mt-4 max-w-2xl mx-auto text-lg sm:text-xl">Simple. Visual. Evidence-informed rankings so you can stay upright on ice.</p>
+    <a href="#ratings" class="inline-block mt-8 px-6 py-3 rounded-2xl bg-white text-gray-900 font-semibold shadow hover:shadow-lg">Browse Ratings</a>
+  </div>
+</section>
 
-      <!-- Figures -->
-      <div class="mx-auto max-w-6xl mt-10">
-        <div class="grid gap-8 md:grid-cols-3">
-          <div class="rounded-3xl border bg-white p-8 shadow-sm hover:shadow-md transition flex flex-col items-center text-center">
-            <svg viewBox="0 0 200 200" class="w-40 h-40" xmlns="http://www.w3.org/2000/svg"><g stroke="currentColor" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 170 H180"/><rect x="60" y="40" width="80" height="90" rx="8"/><path d="M60 70 H140"/><path d="M60 100 H140"/><path d="M65 120 Q100 135 135 120" fill="currentColor" opacity="0.08"/><path d="M95 40 v-12 h10 v12"/><path d="M85 130 L100 170 L120 170 L135 130"/><circle cx="120" cy="60" r="4"/><circle cx="130" cy="50" r="3"/></g></svg>
-            <h3 class="mt-5 font-bold text-lg">Lab-informed criteria</h3>
-            <p class="mt-2 text-sm text-gray-600">Grip on ice/snow, heel-to-toe stability, outsole compound, tread geometry, and optional studs.</p>
-          </div>
-          <div class="rounded-3xl border bg-white p-8 shadow-sm hover:shadow-md transition flex flex-col items-center text-center">
-            <svg viewBox="0 0 200 200" class="w-40 h-40" xmlns="http://www.w3.org/2000/svg"><g stroke="currentColor" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 170 H180"/><circle cx="100" cy="60" r="14"/><path d="M100 74 V110"/><path d="M100 90 L78 110"/><path d="M100 90 L122 102"/><path d="M100 110 L82 150"/><path d="M100 110 L128 150"/><path d="M74 152 h18"/><path d="M120 152 h18"/></g></svg>
-            <h3 class="mt-5 font-bold text-lg">Field observations</h3>
-            <p class="mt-2 text-sm text-gray-600">Real-world walking on slick surfaces; notes on warmth, fit, and water resistance.</p>
-          </div>
-          <div class="rounded-3xl border bg-white p-8 shadow-sm hover:shadow-md transition flex flex-col items-center text-center">
-            <svg viewBox="0 0 200 200" class="w-40 h-40" xmlns="http://www.w3.org/2000/svg"><g stroke="currentColor" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><rect x="50" y="34" width="100" height="132" rx="10"/><rect x="80" y="24" width="40" height="20" rx="6"/><path d="M70 80 l10 10 l16 -16"/><path d="M70 110 l10 10 l16 -16"/><path d="M70 140 l10 10 l16 -16"/><path d="M110 86 H140"/><path d="M110 116 H140"/><path d="M110 146 H140"/></g></svg>
-            <h3 class="mt-5 font-bold text-lg">External evidence</h3>
-            <p class="mt-2 text-sm text-gray-600">Cross-checks with independent tests (e.g., CBC Marketplace) and expert guides.</p>
+<!-- ---------- Ratings section ---------- -->
+<section id="ratings" class="py-16 sm:py-20">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <h2 class="text-center text-3xl sm:text-4xl font-extrabold">Footwear Ratings</h2>
+    <p class="text-center mt-2 text-gray-600">Pick a category to see shoe lists and scores.</p>
+
+    <!-- Category cards -->
+    <div class="mt-10 grid gap-8 md:grid-cols-3">
+      <button onclick="showCategory('casual')" class="group text-left">
+        <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 bg-cover-center" style="background-image:url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Casual.jpeg')">
+          <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
+          <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Casual Footwear</h3>
+          <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
+            <span class="font-bold">Ratings</span><span aria-hidden>→</span>
           </div>
         </div>
-
-        <div class="mt-7 flex justify-center">
-          <a href="how-we-test.html" class="inline-flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-2xl border hover:bg-gray-50">
-            <span>See full test method</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M7 17L17 7M10 7h7v7"/></svg>
-          </a>
+      </button>
+      <button onclick="showCategory('work')" class="group text-left">
+        <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 bg-cover-center" style="background-image:url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Safety.jpeg')">
+          <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
+          <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Work Safety Footwear</h3>
+          <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
+            <span class="font-bold">Ratings</span><span aria-hidden>→</span>
+          </div>
         </div>
-      </div>
+      </button>
+      <button onclick="showCategory('spikes')" class="group text-left">
+        <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 bg-cover-center" style="background-image:url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Spike.jpeg')">
+          <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
+          <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Spikes</h3>
+          <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
+            <span class="font-bold">Ratings</span><span aria-hidden>→</span>
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+</section>
 
-      <!-- Category cards -->
-      <div class="mt-10 grid gap-8 md:grid-cols-3">
-        <button onclick="showCategory('casual')" class="group text-left">
-          <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 card-bg-casual bg-cover-center">
-            <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
-            <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Casual Footwear</h3>
-            <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between"><span class="font-bold">Ratings</span><span aria-hidden>→</span></div>
-          </div>
-        </button>
-        <button onclick="showCategory('work')" class="group text-left">
-          <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 card-bg-work bg-cover-center">
-            <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
-            <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Work Safety Footwear</h3>
-            <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between"><span class="font-bold">Ratings</span><span aria-hidden>→</span></div>
-          </div>
-        </button>
-        <button onclick="showCategory('spikes')" class="group text-left">
-          <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 card-bg-spikes bg-cover-center">
-            <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
-            <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Spikes</h3>
-            <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between"><span class="font-bold">Ratings</span><span aria-hidden>→</span></div>
-          </div>
-        </button>
+<!-- ---------- Category view ---------- -->
+<section id="categoryView" class="hidden py-12">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between gap-4">
+      <h2 id="categoryTitle" class="text-3xl font-extrabold">Category</h2>
+      <button onclick="closeCategory()" class="px-4 py-2 rounded-xl border font-semibold hover:bg-gray-50">← Back</button>
+    </div>
+    <ul id="shoeList" class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></ul>
+  </div>
+</section>
+
+<!-- ---------- Shoe detail view ---------- -->
+<section id="shoeDetail" class="hidden py-12">
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between gap-4">
+      <nav class="text-sm text-gray-600" id="shoeBreadcrumb"></nav>
+      <button onclick="closeShoe()" class="px-4 py-2 rounded-xl border font-semibold hover:bg-gray-50">← Back</button>
+    </div>
+    <div class="mt-6 rounded-3xl overflow-hidden border bg-white shadow">
+      <div id="shoeHero" class="h-64 bg-center bg-cover"></div>
+      <div class="p-6 space-y-4">
+        <h2 id="shoeName" class="text-2xl font-extrabold"></h2>
+        <p id="shoeDesc" class="text-gray-700"></p>
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div><h3 class="font-semibold">Pros</h3><ul id="shoePros" class="mt-2 list-disc ml-5 text-sm text-gray-700 space-y-1"></ul></div>
+          <div><h3 class="font-semibold">Cons</h3><ul id="shoeCons" class="mt-2 list-disc ml-5 text-sm text-gray-700 space-y-1"></ul></div>
+        </div>
+        <div id="shoeGallery" class="mt-4 grid grid-cols-3 gap-3"></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Category List View -->
-  <section id="categoryView" class="hidden py-12">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-        <div>
-          <h2 id="categoryTitle" class="text-3xl font-extrabold">Category</h2>
-          <p id="categoryCount" class="text-sm text-gray-500 mt-1"></p>
-        </div>
-        <div class="flex flex-wrap items-center gap-2">
-          <input id="searchBox" type="search" placeholder="Search brand, model…" class="border rounded-xl px-3 py-2 text-sm w-64">
-          <select id="sortSel" class="border rounded-xl px-3 py-2 text-sm">
-            <option value="best">Sort: Snow (high→low)</option>
-            <option value="new">Sort: Newest tested</option>
-            <option value="az">Sort: A→Z</option>
-          </select>
-          <button onclick="closeCategory()" class="px-4 py-2 rounded-xl border font-semibold hover:bg-gray-50">← Back</button>
-        </div>
-      </div>
-      <ul id="shoeList" class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></ul>
-    </div>
-  </section>
-
-  <!-- Shoe Detail View -->
-  <section id="shoeDetail" class="hidden py-12">
-    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between gap-4">
-        <nav class="text-sm text-gray-600" id="shoeBreadcrumb"></nav>
-        <button onclick="closeShoe()" class="px-4 py-2 rounded-xl border font-semibold hover:bg-gray-50">← Back</button>
-      </div>
-      <div class="mt-6 rounded-3xl overflow-hidden border bg-white shadow">
-        <div id="shoeHero" class="h-64 bg-center bg-cover"></div>
-        <div class="p-6 space-y-4">
-          <h2 id="shoeName" class="text-2xl font-extrabold"></h2>
-          <div class="flex items-center gap-6 text-lg">
-            <div class="flex items-center gap-2">
-              <span class="text-sm font-semibold text-gray-600">Snow/Ice:</span>
-              <span id="shoeSnow" class="text-blue-600 text-xl"></span>
-            </div>
-          </div>
-          <p id="shoeDesc" class="text-gray-700"></p>
-          <div class="grid sm:grid-cols-2 gap-6">
-            <div><h3 class="font-semibold">Pros</h3><ul id="shoePros" class="mt-2 list-disc ml-5 text-sm text-gray-700 space-y-1"></ul></div>
-            <div><h3 class="font-semibold">Cons</h3><ul id="shoeCons" class="mt-2 list-disc ml-5 text-sm text-gray-700 space-y-1"></ul></div>
-          </div>
-          <div id="shoeGallery" class="mt-4 grid grid-cols-3 gap-3"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- News / Resources -->
-  <section id="news" class="py-16 bg-gray-50">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl sm:text-4xl font-extrabold">Guides & Investigations</h2>
-      <p class="text-gray-600 mt-2">Curated reads and videos that inform our ratings.</p>
-      <div class="mt-8 grid gap-6 md:grid-cols-3">
-        <a href="https://www.cbc.ca/news/canada/marketplace-boot-test-1.6252613" target="_blank" rel="noopener" class="block rounded-2xl bg-white overflow-hidden shadow hover:shadow-lg transition">
-          <div class="h-40 bg-gray-200 bg-cover bg-center" style="background-image:url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/logos/newsLogo_638215626098456151.png?v=638962568096370112')"></div>
-          <div class="p-6"><h3 class="font-bold text-lg">CBC Marketplace: Winter Boot Grip Test</h3><p class="mt-2 text-sm text-gray-600">Independent ice-traction testing across popular boots.</p></div>
-        </a>
-        <a href="https://www.youtube.com/watch?v=JhUk7qMtcjI&t=25s" target="_blank" rel="noopener" class="block rounded-2xl bg-white overflow-hidden shadow hover:shadow-lg transition">
-          <div class="relative h-40 bg-gray-200 bg-cover bg-center" style="background-image:url('https://img.youtube.com/vi/JhUk7qMtcjI/hqdefault.jpg')">
-            <div class="absolute inset-0 bg-black/25"></div>
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div class="w-14 h-14 rounded-full bg-white/90 shadow flex items-center justify-center">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="text-red-600"><path d="M8 5v14l11-7z"/></svg>
-              </div>
-            </div>
-          </div>
-          <div class="p-6"><h3 class="font-bold text-lg">Video: The Science of Walking on Ice</h3><p class="mt-2 text-sm text-gray-600">A quick explainer on slip mechanics and tread design.</p></div>
-        </a>
-        <a href="https://zoomer.com/health/2020/12/09/bring-on-the-snow-an-expert-guide-to-shopping-for-winter-boots" target="_blank" rel="noopener" class="block rounded-2xl bg-white overflow-hidden shadow hover:shadow-lg transition">
-          <div class="h-40 bg-gray-200 bg-cover bg-center" style="background-image:url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Spike.jpeg')"></div>
-          <div class="p-6"><h3 class="font-bold text-lg">Expert Guide: How to Shop for Winter Boots</h3><p class="mt-2 text-sm text-gray-600">Practical tips for warmth, grip, and comfort.</p></div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <<!-- ======= Site Footer (dark) ======= -->
+<!-- ---------- Footer ---------- -->
 <footer class="bg-[#171717] text-gray-200 pt-12" id="site-footer">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-    <!-- Newsletter signup -->
     <div class="grid gap-6 md:grid-cols-3 items-center pb-10 border-b border-white/10">
       <div class="flex items-center gap-4">
         <div class="shrink-0 rounded-md bg-white px-2 py-1">
@@ -194,304 +133,107 @@
           <p class="text-sm text-gray-400">Get updates when new footwear is tested.</p>
         </div>
       </div>
-
       <form id="nlForm" class="md:col-span-2 flex flex-col sm:flex-row gap-3">
-        <input type="text" name="name" placeholder="Name" class="w-full sm:w-auto grow rounded-xl bg-white/10 border border-white/10 px-4 py-2.5 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white/30">
-        <input type="email" name="email" placeholder="Email" class="w-full sm:w-auto grow rounded-xl bg-white/10 border border-white/10 px-4 py-2.5 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white/30">
+        <input type="text" name="name" placeholder="Name" class="grow rounded-xl bg-white/10 border border-white/10 px-4 py-2.5 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white/30">
+        <input type="email" name="email" placeholder="Email" class="grow rounded-xl bg-white/10 border border-white/10 px-4 py-2.5 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white/30">
         <button class="rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white font-semibold px-5 py-2.5">Subscribe</button>
       </form>
     </div>
 
-    <!-- Disclaimer -->
-    <p class="text-center text-sm sm:text-[15px] font-semibold text-gray-200/90 mt-8">
-      The information on this site is intended to be for informational purposes only and is not a substitute for professional advice.
-      UHN makes no representation or warranty about the suitability of any of the products advertised on this site for any particular consumer.
-      All boots are tested in new condition.
+    <p class="text-center text-sm font-semibold text-gray-200/90 mt-8">
+      The information on this site is for informational purposes only and is not a substitute for professional advice. UHN makes no warranty about product suitability. All boots are tested in new condition.
     </p>
 
-    <!-- 3-column content -->
     <div class="grid gap-10 md:grid-cols-3 mt-10">
-      <!-- Contact -->
       <div>
         <h4 class="font-bold text-lg mb-4">Contact Info</h4>
         <dl class="space-y-2 text-sm">
           <div><dt class="inline font-semibold">PHONE:</dt> <dd class="inline"> (416) 597-3422 x7227</dd></div>
           <div><dt class="inline font-semibold">EMAIL:</dt> <dd class="inline"> ratemytreads@uhn.ca</dd></div>
           <div><dt class="inline font-semibold">ADDRESS:</dt> <dd class="inline"> 550 University Ave, Toronto, ON</dd></div>
-          <div><dt class="inline font-semibold">WORKING DAYS / HOURS:</dt> <dd class="inline"> Mon–Fri / 9:00 AM – 5:00 PM</dd></div>
+          <div><dt class="inline font-semibold">HOURS:</dt> <dd class="inline"> Mon–Fri / 9 AM – 5 PM</dd></div>
         </dl>
       </div>
 
-      <!-- KITE @ UHN links -->
       <div>
         <h4 class="font-bold text-lg mb-4">KITE @ UHN</h4>
         <ul class="space-y-2 text-sm">
-          <li><a class="hover:text-white underline underline-offset-2 decoration-white/20" href="https://kite-uhn.com/" target="_blank" rel="noopener">About KITE</a></li>
-          <li><a class="hover:text-white underline underline-offset-2 decoration-white/20" href="https://kite-uhn.com/facilities" target="_blank" rel="noopener">Facilities</a></li>
-          <li><a class="hover:text-white underline underline-offset-2 decoration-white/20" href="https://kite-uhn.com/virtual-tour" target="_blank" rel="noopener">Virtual Tour</a></li>
-          <li><a class="hover:text-white underline underline-offset-2 decoration-white/20" href="https://kite-uhn.com/news" target="_blank" rel="noopener">News</a></li>
+          <li><a class="hover:text-white underline underline-offset-2 decoration-white/20" href="https://kite-uhn.com/">About KITE</a></li>
+          <li><a class="hover:text-white underline underline-offset-2 decoration-white/20" href="https://kite-uhn.com/facilities">Facilities</a></li>
+          <li><a class="hover:text-white underline underline-offset-2 decoration-white/20" href="https://kite-uhn.com/virtual-tour">Virtual Tour</a></li>
+          <li><a class="hover:text-white underline underline-offset-2 decoration-white/20" href="https://kite-uhn.com/news">News</a></li>
         </ul>
       </div>
 
-     
-    <!-- Bottom strip -->
-    <div class="mt-12 border-t border-white/10">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <!-- Partner / institute logo -->
-        <div class="flex items-center gap-3">
-          <span class="inline-flex items-center justify-center rounded-full bg-rose-600/90 w-8 h-8">🍁</span>
-          <span class="text-sm text-gray-300">UHN • KITE Research Institute</span>
-        </div>
-
-        <!-- Copyright -->
-        <p class="text-sm text-gray-400">Copyright © <span id="year"></span> KITE. All rights reserved.</p>
-
-        <!-- Socials -->
-        <div class="flex items-center gap-4 text-gray-300">
-          <a class="hover:text-white" aria-label="Facebook" href="#" target="_blank" rel="noopener">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.7-1.6 1.5V12h2.7l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg>
-          </a>
-          <a class="hover:text-white" aria-label="Twitter" href="#" target="_blank" rel="noopener">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.8c-.7.3-1.5.6-2.3.7.8-.5 1.4-1.3 1.7-2.2-.8.5-1.7.9-2.6 1.1A3.9 3.9 0 0 0 12 8.9c0 .3 0 .6.1.9-3.3-.2-6.3-1.8-8.3-4.2-.3.6-.5 1.3-.5 2 0 1.4.7 2.6 1.8 3.3-.6 0-1.2-.2-1.7-.5v.1c0 2 1.5 3.6 3.4 3.9-.4.1-.8.1-1.2.1-.3 0-.6 0-.8-.1.6 1.8 2.3 3.1 4.3 3.2A7.9 7.9 0 0 1 2 19.5 11.2 11.2 0 0 0 8.1 21c7.5 0 11.6-6.2 11.6-11.6v-.5c.8-.6 1.4-1.3 1.9-2.1z"/></svg>
-          </a>
-          <a class="hover:text-white" aria-label="LinkedIn" href="#" target="_blank" rel="noopener">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.9 3.9 6 2.5 6S0 4.9 0 3.5 1.1 1 2.5 1s2.48 1.1 2.48 2.5zM.5 8h4V23h-4V8zM8 8h3.8v2.1h.1c.5-1 1.9-2.1 3.9-2.1 4.2 0 5 2.7 5 6.1V23h-4v-6.7c0-1.6 0-3.6-2.2-3.6s-2.5 1.7-2.5 3.5V23H8V8z"/></svg>
-          </a>
-          <a class="hover:text-white" aria-label="YouTube" href="#" target="_blank" rel="noopener">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2c-.3-1.1-1.2-2-2.3-2.3C19.3 3.5 12 3.5 12 3.5s-7.3 0-9.2.4C1.7 4.2.8 5.1.5 6.2.1 8 .1 12 .1 12s0 4 .4 5.8c.3 1.1 1.2 2 2.3 2.3 1.9.4 9.2.4 9.2.4s7.3 0 9.2-.4c1.1-.3 2-1.2 2.3-2.3.4-1.8.4-5.8.4-5.8s0-4-.4-5.8zM9.8 15.5v-7l6.1 3.5-6.1 3.5z"/></svg>
-          </a>
+      <div>
+        <h4 class="font-bold text-lg mb-4">WinterLab Photos</h4>
+        <div class="grid grid-cols-4 gap-2">
+          <div class="aspect-square rounded-lg overflow-hidden"><div class="w-full h-full bg-cover bg-center" style="background-image:url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/winterlab.jpg')"></div></div>
+          <div class="aspect-square rounded-lg overflow-hidden"><div class="w-full h-full bg-cover bg-center" style="background-image:url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Safety.jpeg')"></div></div>
+          <div class="aspect-square rounded-lg overflow-hidden"><div class="w-full h-full bg-cover bg-center" style="background-image:url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Casual.jpeg')"></div></div>
+          <div class="aspect-square rounded-lg overflow-hidden"><div class="w-full h-full bg-cover bg-center" style="background-image:url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Spike.jpeg')"></div></div>
         </div>
       </div>
     </div>
 
-    <!-- Back to top button -->
-    <button id="toTop" class="fixed bottom-6 right-6 hidden sm:flex items-center justify-center w-12 h-12 rounded-xl bg-white text-gray-900 shadow-lg hover:shadow-xl" aria-label="Back to top">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 15l7-7 7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
+    <div class="mt-12 border-t border-white/10 text-center py-6 text-sm text-gray-400">
+      © <span id="year"></span> KITE Research Institute • All rights reserved.
+    </div>
+  </div>
+</footer>
 
-    <script>
-      // Fake newsletter submit (no backend yet)
-      document.getElementById('nlForm')?.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const fd = new FormData(e.target);
-        alert(`Thanks, ${fd.get('name')||'friend'}! We'll keep you posted at ${fd.get('email')||'your email'}.`);
-        e.target.reset();
-      });
-      // Back-to-top visibility + behavior
-      const toTop = document.getElementById('toTop');
-      window.addEventListener('scroll', () => {
-        const y = window.scrollY || document.documentElement.scrollTop;
-        toTop.classList.toggle('hidden', y < 600);
-      });
-      toTop?.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
-      // Year (if not already set above)
-      const yearEl = document.getElementById('year');
-      if (yearEl && !yearEl.textContent) yearEl.textContent = new Date().getFullYear();
-    </script>
-  </footer>
+<!-- ---------- JS ---------- -->
+<script>
+  // --- Tier mapping (color + label) ---
+  function tierInfo(snow=0){
+    if(snow>=15) return {key:'vh',name:'Very High',chip:'❄❄❄',bg:'bg-green-50',border:'border-green-700',text:'text-green-800'};
+    if(snow>=11) return {key:'hi',name:'High',chip:'❄❄',bg:'bg-green-50',border:'border-green-500',text:'text-green-700'};
+    if(snow>=7)  return {key:'med',name:'Medium',chip:'❄',bg:'bg-amber-50',border:'border-amber-500',text:'text-amber-700'};
+    return          {key:'low',name:'Low',chip:'—',bg:'bg-red-50',border:'border-red-500',text:'text-red-700'};
+  }
 
-  <script>
-    // ---------------- Helpers ----------------
-    const FALLBACK = {
-      casual: 'https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Casual.jpeg',
-      work:   'https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Safety.jpeg',
-      spikes: 'https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Spike.jpeg'
-    };
-    const WIKI = {
-      Sorel: 'https://upload.wikimedia.org/wikipedia/commons/6/60/Sorel_Caribou_boots.jpg'
-    };
-    function flakes(n){ if(n>=12) return 3; if(n>=8) return 2; if(n>=4) return 1; return 0; }
-    function fmtDate(s){ if(!s) return ''; const d=new Date(s); if(isNaN(d)) return s; return d.toLocaleDateString(); }
-
-    // ---------------- Seed DATA (from your list; you can add more below) ----------------
-    const DATA = {
-      casual: {
-        title: 'Casual Footwear',
-        items: [
-          { slug:'kodiak-klondike-kids', name:'Kodiak Klondike (Kids)', brand:'Kodiak', style:'823004UEC', snow:6, date:'2016-12-20', img:'' },
-          { slug:'adidas-climawarm-choleah', name:'Adidas Climawarm Choleah Padded', brand:'Adidas', style:'AQ2024', snow:0, date:'2017-02-17', img:'' },
-          { slug:'baffin-telluride', name:'Baffin Telluride', brand:'Baffin', style:'4510-0185-001', snow:3, date:'2016-11-15', img:'' },
-          { slug:'baffin-urba', name:'Baffin URBA', brand:'Baffin', style:'URBA-W022', snow:9, date:'2021-09-10', img:'' },
-          { slug:'clarks-desert-boot', name:'Clarks Desert Casual Boots', brand:'Clarks', style:'26111496', snow:5, date:'2017-02-17', img:'' },
-          { slug:'columbia-ice-maiden-slip', name:'Columbia Ice Maiden II Slip', brand:'Columbia', style:'1554181', snow:1, date:'2016-12-07', img:'' },
-          { slug:'crocs-lodgepoint', name:'Crocs Lodgepoint Lace', brand:'Crocs', style:'203423-001', snow:5, date:'2017-02-16', img:'' },
-          { slug:'keen-revel-iv-mid-polar-magnet', name:'KEEN Revel IV Mid Polar (Magnet/North A)', brand:'KEEN', style:'1023629', snow:10, date:'2020-12-18', img:'' },
-          { slug:'keen-revel-iv-mid-polar-black', name:'KEEN Revel IV Mid Polar (Black/Harbor)', brand:'KEEN', style:'1023631', snow:10, date:'2020-12-18', img:'' },
-          { slug:'merrell-thermo-adventure-iceplus-6wp', name:'Merrell Thermo Adventure ICE+ 6” WP', brand:'Merrell', style:'J06096', snow:6, date:'2018-11-20', img:'' },
-          { slug:'merrell-icepack-moc-polar-wp', name:'Merrell Icepack MOC Polar WP', brand:'Merrell', style:'J32902', snow:9, date:'2018-11-08', img:'' },
-          { slug:'sorel-cumberland', name:'Sorel Cumberland', brand:'Sorel', style:'1129351969', snow:0, date:'2017-02-17', img: WIKI.Sorel },
-          { slug:'ugg-adirondack-iii', name:'Ugg Adirondack Boot III', brand:'Ugg', style:'1095141', snow:2, date:'2022-09-02', img:'' },
-          { slug:'windriver-peak-icefx-hikers', name:'WindRiver Peak ICEFX Winter Hikers', brand:'WindRiver', style:'5DQEWRFB8-5088', snow:8, date:'2019-08-12', img:'' },
-          { slug:'windriver-ice-queen-low-black', name:'WindRiver Ice Queen Low ICEFX (Black)', brand:'WindRiver', style:'5DQEWRFB23-5558', snow:10, date:'2025-01-13', img:'' }
-        ]
-      },
-      work: {
-        title: 'Work Safety Footwear',
-        items: [
-          { slug:'dakota-womens-icefx-felt-pack', name:'Dakota Women’s ICEFX Felt Pack CTCP', brand:'Dakota', style:'5BOFDK7-8520', snow:11, date:'2025-10-14', img:'' },
-          { slug:'dakota-tod-ctcp', name:'Dakota Traction on Demand CTCP', brand:'Dakota', style:'5ANFDKW8-8912', snow:15, date:'2018-12-18', img:'' },
-          { slug:'windriver-blackcomb-black', name:'WindRiver Blackcomb Winter Boots (Black)', brand:'WindRiver', style:'5DQEWRFB20-5703', snow:6, date:'2023-02-22', img:'' },
-          { slug:'windriver-blackcomb-plum', name:'WindRiver Blackcomb Winter Boots (Plum)', brand:'WindRiver', style:'5DQEWRFB20-5704', snow:6, date:'2023-02-22', img:'' },
-          { slug:'keen-oakland-6-bison', name:'KEEN Oakland 6” (Bison)', brand:'KEEN', style:'1020082', snow:7, date:'2018-09-26', img:'' },
-          { slug:'wolverine-glacier-csa', name:'Wolverine Glacier CSA', brand:'Wolverine', style:'W19303', snow:8, date:'2017-04-04', img:'' },
-          { slug:'royer-revolt-40-8921', name:'ROYER Revolt -40', brand:'ROYER', style:'8921RTAG', snow:9, date:'2021-03-19', img:'' },
-          { slug:'helly-work-ctcp-8', name:'Helly Hansen Work 8" CTCP ICEFX', brand:'Helly Hansen', style:'HHF231104', snow:10, date:'2025-10-14', img:'' },
-          { slug:'helly-work-ctcp', name:'Helly Hansen CTCP Safety Boot', brand:'Helly Hansen', style:'HHF231102', snow:12, date:'2025-09-12', img:'' },
-          { slug:'timberland-boondock-91631', name:'Timberland BoonDock (2024)', brand:'Timberland', style:'91631', snow:0, date:'2024-01-09', img:'' }
-        ]
-      },
-      spikes: {
-        title: 'Spikes & Traction Aids',
-        items: [
-          { slug:'windriver-yamnuska-tod', name:'WindRiver Yamnuska Traction on Demand', brand:'WindRiver', style:'5CPEWRF18-5261', snow:15, date:'2018-12-18', img:'' },
-          { slug:'korkers-snowjack-pro', name:'Korkers / Icebug SnowJack Pro', brand:'Korkers/Icebug', style:'IB7520BK', snow:12, date:'2021-05-07', img:'' },
-          { slug:'impacto-stabilicers', name:'Impacto STABILicers / Overshoes', brand:'Impacto', style:'GRIP800 / OA9300', snow:9, date:'2017-09-20', img:'' }
-        ]
-      }
-    };
-
-    // --------- Optional: bulk add more rows here (they’ll auto-slot) ----------
-    const EXTRA_ITEMS = [
-      // Example:
-      // {cat:'casual', slug:'columbia-minx-shorty', name:'Columbia Minx Shorty Omni-Heat', brand:'Columbia', style:'1554051010', snow:0, date:'2017-02-17', img:''},
-      // Paste more objects in this array using the same shape.
-    ];
-    EXTRA_ITEMS.forEach(x => { if (DATA[x.cat]) DATA[x.cat].items.push(x); });
-
-    // ---------------- UI wiring ----------------
-    const ratingsSection = document.getElementById('ratings');
-    const categoryView  = document.getElementById('categoryView');
-    const categoryTitle = document.getElementById('categoryTitle');
-    const categoryCount = document.getElementById('categoryCount');
-    const shoeList      = document.getElementById('shoeList');
-    const searchBox     = document.getElementById('searchBox');
-    const sortSel       = document.getElementById('sortSel');
-
-    let currentCat = null;
-    let filtered = [];
-
-    function showCategory(key) {
-      currentCat = key;
-      const cat = DATA[key];
-      if (!cat) return;
-      categoryTitle.textContent = cat.title;
-
-      filtered = [...cat.items];
-      renderList();
-      ratingsSection.classList.add('hidden');
-      document.getElementById('shoeDetail').classList.add('hidden');
-      categoryView.classList.remove('hidden');
-      window.location.hash = 'categoryView';
+  const DATA = {
+    casual:{
+      title:'Casual Footwear',
+      items:[
+        {slug:'keen-revel-iv-mid-polar',name:'KEEN Revel IV Mid Polar (Magnet/North A)',brand:'KEEN',style:'1023629',snow:15,img:'',desc:'Warm insulated boot with excellent traction.'},
+        {slug:'baffin-urba',name:'Baffin URBA',brand:'Baffin',style:'URBA-W022',snow:9,img:'',desc:'Urban winter boot for light snow use.'},
+        {slug:'merrell-icepack',name:'Merrell Icepack MOC Polar WP',brand:'Merrell',style:'J32902',snow:9,img:'',desc:'Waterproof moc with ICE+ outsole.'},
+        {slug:'windriver-peak',name:'WindRiver Peak ICEFX Winter Hikers',brand:'WindRiver',style:'5DQEWRFB8-5088',snow:8,img:'',desc:'Durable hiker for daily commuting.'},
+        {slug:'windriver-icequeen',name:'WindRiver Ice Queen Low ICEFX (Black)',brand:'WindRiver',style:'5DQEWRFB23-5558',snow:10,img:'',desc:'Excellent grip on cold ice.'}
+      ]
     }
+  };
 
-    function renderList() {
-      const q = (searchBox?.value || '').toLowerCase().trim();
-      const cat = DATA[currentCat];
-      let items = [...cat.items];
+  const ratingsSection=document.getElementById('ratings');
+  const categoryView=document.getElementById('categoryView');
+  const shoeList=document.getElementById('shoeList');
 
-      // Filter
-      if (q) {
-        items = items.filter(it =>
-          [it.name, it.brand, it.style].filter(Boolean).some(s => s.toLowerCase().includes(q))
-        );
-      }
+  function showCategory(key){
+    const cat=DATA[key]; if(!cat)return;
+    shoeList.innerHTML='';
+    cat.items.forEach(item=>{
+      const t=tierInfo(item.snow);
+      const li=document.createElement('li');
+      li.className=`rounded-2xl overflow-hidden border-2 ${t.bg} ${t.border} shadow hover:shadow-lg transition cursor-pointer tier-${t.key}`;
+      li.onclick=()=>showShoe(key,item.slug);
+      li.innerHTML=`
+        <div class="tier-strip"></div>
+        <div class="h-44 bg-gray-100 bg-cover bg-center" style="background-image:url('${item.img||"https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Casual.jpeg"}')"></div>
+        <div class="p-4">
+          <h4 class="font-semibold text-lg">${item.name}</h4>
+          <p class="text-xs text-gray-500">${item.brand} • ${item.style}</p>
+          <p class="mt-1 flex items-center gap-2 text-sm">
+            <span class="${t.text} font-semibold">${t.name}</span>
+            <span>${t.chip}</span>
+          </p>
+        </div>`;
+      shoeList.appendChild(li);
+    });
+    ratingsSection.classList.add('hidden');
+    categoryView.classList.remove('hidden');
+  }
 
-      // Sort
-      const mode = sortSel?.value || 'best';
-      items.sort((a,b) => {
-        if (mode === 'new') return new Date(b.date||0) - new Date(a.date||0);
-        if (mode === 'az')  return (a.name||'').localeCompare(b.name||'');
-        // best
-        return (b.snow||0) - (a.snow||0);
-      });
-
-      categoryCount.textContent = `${items.length} item${items.length===1?'':'s'}`;
-
-      // Render
-      shoeList.innerHTML = '';
-      items.forEach((item) => {
-        const imgSrc = item.img || FALLBACK[currentCat];
-        const snow3  = flakes(item.snow || 0);
-        const li = document.createElement('li');
-        li.className = 'rounded-2xl overflow-hidden border bg-white shadow hover:shadow-lg transition cursor-pointer';
-        li.onclick = () => showShoe(currentCat, item.slug);
-        li.innerHTML = `
-          <div class="h-44 bg-gray-100 bg-cover bg-center" style="background-image:url('${imgSrc}')"></div>
-          <div class="p-4">
-            <h4 class="font-semibold text-lg">${item.name}</h4>
-            <p class="text-xs text-gray-500">${item.brand||''}${item.style?` • ${item.style}`:''}${item.date?` • ${fmtDate(item.date)}`:''}</p>
-            <p class="text-sm text-gray-700 mt-1">${snow3 ? '❄'.repeat(snow3) : '—'}</p>
-          </div>`;
-        shoeList.appendChild(li);
-      });
-    }
-
-    searchBox?.addEventListener('input', renderList);
-    sortSel?.addEventListener('change', renderList);
-
-    function closeCategory() {
-      categoryView.classList.add('hidden');
-      ratingsSection.classList.remove('hidden');
-      window.location.hash = 'ratings';
-    }
-
-    // -------- Detail view --------
-    function getItem(catKey, slug) {
-      const cat = DATA[catKey];
-      if (!cat) return null;
-      return cat.items.find(i => i.slug === slug) || null;
-    }
-
-    function showShoe(catKey, slug) {
-      const item = getItem(catKey, slug);
-      if (!item) return;
-      const catTitle = DATA[catKey].title;
-
-      document.getElementById('shoeBreadcrumb').innerHTML =
-        `<a href="#ratings" class="hover:underline" onclick="closeShoe(); closeCategory();">Ratings</a>
-         <span class="mx-1">/</span>
-         <a href="#categoryView" class="hover:underline" onclick="closeShoe();">${catTitle}</a>
-         <span class="mx-1">/</span>
-         <span class="font-semibold">${item.name}</span>`;
-
-      const hero = item.img || FALLBACK[catKey];
-      document.getElementById('shoeHero').style.backgroundImage = `url('${hero}')`;
-      document.getElementById('shoeName').textContent = item.name;
-
-      const snow3 = flakes(item.snow || 0);
-      document.getElementById('shoeSnow').textContent = snow3 ? '❄'.repeat(snow3) : '—';
-
-      const desc = `${item.brand?item.brand+' • ':''}${item.style||''}${item.date?` • Tested ${fmtDate(item.date)}`:''}`;
-      document.getElementById('shoeDesc').textContent = desc;
-
-      const prosUl = document.getElementById('shoePros');
-      const consUl = document.getElementById('shoeCons');
-      prosUl.innerHTML = '';
-      consUl.innerHTML = '';
-      (item.pros||[]).forEach(p => { const li = document.createElement('li'); li.textContent = p; prosUl.appendChild(li); });
-      (item.cons||[]).forEach(c => { const li = document.createElement('li'); li.textContent = c; consUl.appendChild(li); });
-
-      const gal = document.getElementById('shoeGallery');
-      gal.innerHTML = '';
-      (item.gallery||[]).forEach(src => {
-        const d = document.createElement('div');
-        d.className = 'h-24 bg-center bg-cover rounded-xl border';
-        d.style.backgroundImage = `url('${src}')`;
-        gal.appendChild(d);
-      });
-
-      categoryView.classList.add('hidden');
-      document.getElementById('shoeDetail').classList.remove('hidden');
-      window.location.hash = `shoe-${slug}`;
-    }
-
-    function closeShoe() {
-      document.getElementById('shoeDetail').classList.add('hidden');
-      categoryView.classList.remove('hidden');
-      window.location.hash = 'categoryView';
-    }
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+  function showShoe(cat,slug){
+    const item=(DATA[cat].items||[]).find(i=>i.slug===slug);
+    if(!item)return
