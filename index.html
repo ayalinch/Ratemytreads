@@ -50,6 +50,7 @@
 </head>
 
 <body class="bg-gray-50 text-gray-800 font-sans">
+
   <!-- Nav -->
   <header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
     <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
@@ -63,13 +64,20 @@
     </nav>
   </header>
 
-  <!-- Hero -->
-  <section class="hero-bg bg-cover-center min-h-[80vh] flex items-center justify-center relative mt-16">
-    <div class="absolute inset-0 bg-black/40"></div>
+  <!-- Hero (blurred slideshow) -->
+  <section class="relative min-h-[80vh] flex items-center justify-center mt-16 overflow-hidden">
+    <div class="absolute inset-0 hero-bg"></div>
+    <div class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
     <div class="relative z-10 text-center text-white px-6">
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">Real-World Winter Footwear Ratings</h1>
-      <p class="mt-4 max-w-2xl mx-auto text-lg sm:text-xl">Simple. Visual. Evidence-informed rankings so you can stay upright on ice.</p>
-      <a href="#ratings" class="inline-block mt-8 px-6 py-3 rounded-2xl bg-white text-gray-900 font-semibold shadow hover:shadow-lg">Browse Ratings</a>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
+        Real-World Winter Footwear Ratings
+      </h1>
+      <p class="mt-4 max-w-2xl mx-auto text-lg sm:text-xl">
+        Simple. Visual. Evidence-informed rankings so you can stay upright on ice.
+      </p>
+      <a href="#ratings" class="inline-block mt-8 px-6 py-3 rounded-2xl bg-white text-gray-900 font-semibold shadow hover:shadow-lg">
+        Browse Ratings
+      </a>
     </div>
   </section>
 
