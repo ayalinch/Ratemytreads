@@ -1,0 +1,156 @@
+import os, json, zipfile, re, textwrap
+
+root = "/mnt/data/ratemytreads_site"
+
+# Update styles for bigger radii and overlay utilities
+styles_path = os.path.join(root, "assets", "styles.css")
+with open(styles_path, "a") as f:
+    f.write("\n/* Vibe tweaks */\n.rounded-3xl{border-radius:1.5rem}\n.card-overlay:before{content:'';position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.5), rgba(0,0,0,.1) 60%, rgba(0,0,0,0));}\n.headline{font-weight:800;letter-spacing:-0.02em;}\n.kicker{font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;color:rgb(100,116,139)}\n.arrow-link{display:inline-flex;align-items:center;gap:.5rem}\n.arrow-link svg{transition:transform .15s ease}\n.arrow-link:hover svg{transform:translateX(4px)}\n")
+
+# Overwrite index.html with a MaRS-style split hero and big cards
+index_path = os.path.join(root, "index.html")
+index_html = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RateMyTreads</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body class="bg-white text-slate-900">
+  <nav class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center gap-6">
+      <a href="index.html" class="flex items-center gap-2">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="1.5" d="M12 3v3m7 5-4 7H9l-4-7m14 0H5m14 0-2-5M5 11l2-5" /></svg>
+        <span class="font-semibold">RateMyTreads</span>
+      </a>
+      <a href="ratings.html" class="ml-auto font-semibold hover:text-blue-700">Footwear Ratings</a>
+    </div>
+  </nav>
+
+  <!-- Split hero like MaRS: big headline left, rounded media pane right -->
+  <header class="max-w-7xl mx-auto px-6 py-12">
+    <div class="grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h1 class="headline text-5xl md:text-6xl tracking-tight">We turn ice traction data into simple footwear scores</h1>
+        <p class="mt-4 text-lg text-slate-700">As a transparent testing group, we measure traction on cold and wet ice, then translate those measurements into easy 1–3 snowflake ratings shoppers can trust.</p>
+        <div class="mt-6">
+          <a class="arrow-link font-semibold text-blue-700" href="#learn">Learn more
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5l7 7-7 7" stroke-width="1.5"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="rounded-3xl overflow-hidden shadow-lg">
+        <video autoplay muted loop playsinline class="w-full h-full object-cover">
+          <source src="https://www.kite-uhn.com/Content/videos/labs_video.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 space-y-16">
+    <!-- Large image panels explaining How testing and How ranking -->
+    <section id="learn" class="grid md:grid-cols-2 gap-8">
+      <article class="relative rounded-3xl overflow-hidden shadow-lg">
+        <img src="https://images.unsplash.com/photo-1562119250-0b2f1eed5f18?q=80&w=1600&auto=format&fit=crop" class="w-full h-96 object-cover" alt="Testing on ice">
+        <div class="card-overlay"></div>
+        <div class="absolute bottom-0 p-6 text-white">
+          <div class="kicker">How testing is done</div>
+          <h3 class="headline text-3xl mt-1">We measure MAA on cold & wet ice</h3>
+          <p class="mt-2 max-w-xl text-slate-100">Both ascent and descent. We convert MAA → COF using <code>tan(MAA)</code> so every score maps to a real coefficient of friction.</p>
+        </div>
+      </article>
+      <article class="relative rounded-3xl overflow-hidden shadow-lg">
+        <img src="https://images.unsplash.com/photo-1617134468423-6f579a6561d2?q=80&w=1600&auto=format&fit=crop" class="w-full h-96 object-cover" alt="Ranking explanation">
+        <div class="card-overlay"></div>
+        <div class="absolute bottom-0 p-6 text-white">
+          <div class="kicker">How ranking is done</div>
+          <h3 class="headline text-3xl mt-1">1–3 snowflakes from COF</h3>
+          <p class="mt-2">❄ Basic traction &nbsp; ❄❄ Everyday winter &nbsp; ❄❄❄ High traction / spikes</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- View options cards (big rounded tiles) -->
+    <section>
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="headline text-3xl">View options</h2>
+        <a href="ratings.html" class="arrow-link font-semibold">See all ratings
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5l7 7-7 7" stroke-width="1.5"/></svg>
+        </a>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <a class="relative rounded-3xl overflow-hidden shadow-lg block group" href="ratings.html?category=casual#grid">
+          <img src="https://images.unsplash.com/photo-1542219550-87d6c4f3b6b0?q=80&w=1600&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Casual">
+          <div class="card-overlay"></div>
+          <div class="absolute bottom-0 p-6 text-white">
+            <h3 class="headline text-2xl">Casual Footwear</h3>
+            <div class="opacity-90">Sidewalks & slush</div>
+          </div>
+        </a>
+        <a class="relative rounded-3xl overflow-hidden shadow-lg block group" href="ratings.html?category=work#grid">
+          <img src="https://images.unsplash.com/photo-1562119250-0b2f1eed5f18?q=80&w=1600&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Work safety">
+          <div class="card-overlay"></div>
+          <div class="absolute bottom-0 p-6 text-white">
+            <h3 class="headline text-2xl">Work Safety</h3>
+            <div class="opacity-90">CSA-rated boots</div>
+          </div>
+        </a>
+        <a class="relative rounded-3xl overflow-hidden shadow-lg block group" href="ratings.html?category=spikes#grid">
+          <img src="https://images.unsplash.com/photo-1617134468423-6f579a6561d2?q=80&w=1600&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Spikes">
+          <div class="card-overlay"></div>
+          <div class="absolute bottom-0 p-6 text-white">
+            <h3 class="headline text-2xl">Spikes</h3>
+            <div class="opacity-90">Traction for ice trails</div>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mt-16 border-t">
+    <div class="max-w-7xl mx-auto px-6 py-8 text-sm text-slate-600">
+      © <span id="y"></span> RateMyTreads. All rights reserved.
+    </div>
+  </footer>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
+"""
+open(index_path, "w").write(index_html)
+
+# Update ratings.html to support URL prefilter and apply card style
+ratings_path = os.path.join(root, "ratings.html")
+ratings = open(ratings_path).read()
+ratings = ratings.replace(
+  '<div id="grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>',
+  '<div id="grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>'
+)
+ratings = ratings.replace(
+  "renderTiles(); renderGrid(); renderTray();",
+  """
+  // Apply prefilter from URL (?category=work&gender=Men&rating=2)
+  const params = new URLSearchParams(location.search);
+  ['category','gender','rating'].forEach(k => {
+    if (params.has(k)) {
+      state[k] = k==='rating' ? Number(params.get(k)) : params.get(k);
+      const chip = document.querySelector(`.chip[data-filter=\"${k}\"][data-value=\"${params.get(k)}\"]`);
+      if (chip) { chip.classList.add('active'); }
+    }
+  });
+  renderTiles(); renderGrid(); renderTray();
+  """
+)
+open(ratings_path, "w").write(ratings)
+
+# Zip the updated site
+zip_path = "/mnt/data/ratemytreads_site_mars_vibe.zip"
+with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+    for folder, _, files in os.walk(root):
+        for f in files:
+            full = os.path.join(folder, f)
+            z.write(full, arcname=os.path.relpath(full, root))
+
+zip_path
