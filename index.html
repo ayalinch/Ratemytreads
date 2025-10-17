@@ -2,28 +2,6 @@ import os, zipfile, textwrap, json
 
 root = "/mnt/data/ratemytreads_site"
 
-# Extend styles with KITE blue and dark footer utilities
-styles_path = os.path.join(root, "assets", "styles.css")
-with open(styles_path, "a") as f:
-    f.write("""
-:root{ --kite-blue:0022e3; }
-.btn-kite{ background:var(--kite-blue); color:#fff; }
-.btn-kite:hover{ filter:brightness(.95); }
-.text-kite{ color:var(--kite-blue); }
-.bg-kite{ background:var(--kite-blue); }
-.footer-dark{ background:#121418; color:#E6E8ED; }
-.footer-dark .muted{ color:#AAB1BD; }
-.card-news{ position:relative; overflow:hidden; border-radius:1.25rem; }
-.card-news figure{ height:14rem; }
-.card-news img{ width:100%; height:100%; object-fit:cover; display:block; }
-.card-news .logo{ height:22px; opacity:.95; }
-.card-news .more{ color:var(--kite-blue); font-weight:700; display:inline-flex; align-items:center; gap:.4rem; }
-.card-news .more svg{ width:16px; height:16px; }
-    """)
-
-# Overwrite index.html with tighter copy + news section + colorful end band
-index_path = os.path.join(root, "index.html")
-index_html = f"""
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -208,15 +186,4 @@ index_html = f"""
   <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>
-"""
-open(index_path, "w").write(index_html)
 
-# Re-zip
-zip_path = "/mnt/data/ratemytreads_site_kite_blue.zip"
-with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
-    for folder, _, files in os.walk(root):
-        for f in files:
-            full = os.path.join(folder, f)
-            z.write(full, arcname=os.path.relpath(full, root))
-
-zip_path
