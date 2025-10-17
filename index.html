@@ -151,6 +151,49 @@
     </div>
   </section>
 
+  <!-- Shoe Detail View -->
+  <section id="shoeDetail" class="hidden py-12">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between gap-4">
+        <nav class="text-sm text-gray-600" id="shoeBreadcrumb"></nav>
+        <button onclick="closeShoe()" class="px-4 py-2 rounded-xl border font-semibold hover:bg-gray-50">← Back</button>
+      </div>
+
+      <div class="mt-6 rounded-3xl overflow-hidden border bg-white shadow">
+        <div id="shoeHero" class="h-64 bg-center bg-cover"></div>
+        <div class="p-6 space-y-4">
+          <h2 id="shoeName" class="text-2xl font-extrabold"></h2>
+
+          <div class="flex items-center gap-6 text-lg">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-semibold text-gray-600">Snow/Ice:</span>
+              <span id="shoeSnow" class="text-blue-600 text-xl"></span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-semibold text-gray-600">Wet/Rain:</span>
+              <span id="shoeWet" class="text-xl"></span>
+            </div>
+          </div>
+
+          <p id="shoeDesc" class="text-gray-700"></p>
+
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div>
+              <h3 class="font-semibold">Pros</h3>
+              <ul id="shoePros" class="mt-2 list-disc ml-5 text-sm text-gray-700 space-y-1"></ul>
+            </div>
+            <div>
+              <h3 class="font-semibold">Cons</h3>
+              <ul id="shoeCons" class="mt-2 list-disc ml-5 text-sm text-gray-700 space-y-1"></ul>
+            </div>
+          </div>
+
+          <div id="shoeGallery" class="mt-4 grid grid-cols-3 gap-3"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- News / Resources -->
   <section id="news" class="py-16 bg-gray-50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -194,30 +237,103 @@
   </footer>
 
   <script>
-    // Data: replace/extend with your real inventory and images
+    // -------- DATA (richer; includes detail fields) --------
     const DATA = {
       casual: {
         title: 'Casual Footwear',
         items: [
-          { name: 'Sorel Caribou', rating: 4.5, img: 'https://upload.wikimedia.org/wikipedia/commons/6/60/Sorel_Caribou_boots.jpg' },
-          { name: 'Merrell Thermo Chill', rating: 4.2, img: 'https://upload.wikimedia.org/wikipedia/commons/9/97/Merrell_boot_placeholder.jpg' },
-          { name: 'Columbia Bugaboot', rating: 4.0, img: 'https://upload.wikimedia.org/wikipedia/commons/0/0a/Columbia_boot_placeholder.jpg' },
+          {
+            slug: 'sorel-caribou',
+            name: 'Sorel Caribou',
+            rating: 4.5, snow: 3, wet: 2,
+            img: 'https://upload.wikimedia.org/wikipedia/commons/6/60/Sorel_Caribou_boots.jpg',
+            desc: 'Classic winter boot with heavy insulation and deep lugs. Good stop/turn stability on packed snow.',
+            pros: ['Warm liner', 'Deep lugs', 'Durable leather'],
+            cons: ['Bulky fit', 'Break-in required'],
+            gallery: ['https://upload.wikimedia.org/wikipedia/commons/6/60/Sorel_Caribou_boots.jpg']
+          },
+          {
+            slug: 'merrell-thermo-chill',
+            name: 'Merrell Thermo Chill',
+            rating: 4.2, snow: 2, wet: 2,
+            img: 'https://upload.wikimedia.org/wikipedia/commons/9/97/Merrell_boot_placeholder.jpg',
+            desc: 'Lightweight hiker-style winter boot. Reliable all-round grip with moderate insulation.',
+            pros: ['Lightweight', 'Comfortable fit'],
+            cons: ['Less warm than heavy winter boots']
+          },
+          {
+            slug: 'columbia-bugaboot',
+            name: 'Columbia Bugaboot',
+            rating: 4.0, snow: 2, wet: 1,
+            img: 'https://upload.wikimedia.org/wikipedia/commons/0/0a/Columbia_boot_placeholder.jpg',
+            desc: 'Insulated boot with rigid heel support. Solid traction on snow; caution on smooth ice.',
+            pros: ['Supportive heel', 'Good value'],
+            cons: ['Traction drops on glare ice']
+          }
         ]
       },
       work: {
         title: 'Work Safety Footwear',
         items: [
-          { name: 'KEEN Utility Detroit XT', rating: 4.3, img: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Work_boot_placeholder.jpg' },
-          { name: 'Terra Gantry IceFX', rating: 4.6, img: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Work_boot_placeholder.jpg' },
-          { name: 'Timberland PRO Boondock', rating: 4.1, img: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Work_boot_placeholder.jpg' },
+          {
+            slug: 'keen-detroit-xt',
+            name: 'KEEN Utility Detroit XT',
+            rating: 4.3, snow: 2, wet: 2,
+            img: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Work_boot_placeholder.jpg',
+            desc: 'Safety toe boot with oil/slip-resistant outsole. Balanced traction and comfort.',
+            pros: ['Roomy toe box', 'Slip-resistant rubber'],
+            cons: ['Heavier than casual boots']
+          },
+          {
+            slug: 'terra-gantry-icefx',
+            name: 'Terra Gantry IceFX',
+            rating: 4.6, snow: 3, wet: 2,
+            img: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Work_boot_placeholder.jpg',
+            desc: 'IceFX rubber tuned for cold temperatures. Confident on ice and packed snow.',
+            pros: ['Excellent cold-grip compound', 'Sturdy build'],
+            cons: ['Stiff when new']
+          },
+          {
+            slug: 'timberland-pro-boondock',
+            name: 'Timberland PRO Boondock',
+            rating: 4.1, snow: 2, wet: 2,
+            img: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Work_boot_placeholder.jpg',
+            desc: 'Rugged safety boot with strong outsole lugs. Good everyday traction; bulky.',
+            pros: ['Rugged outsole', 'Protective upper'],
+            cons: ['Bulky, heavier profile']
+          }
         ]
       },
       spikes: {
         title: 'Spikes & Traction Aids',
         items: [
-          { name: 'STABILicers MAXX', rating: 4.7, img: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Ice_cleats_placeholder.jpg' },
-          { name: 'Yaktrax RUN', rating: 4.4, img: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Ice_cleats_placeholder.jpg' },
-          { name: 'Kahtoola EXOspikes', rating: 4.5, img: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Ice_cleats_placeholder.jpg' },
+          {
+            slug: 'stabilicers-maxx',
+            name: 'STABILicers MAXX',
+            rating: 4.7, snow: 3, wet: 1,
+            img: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Ice_cleats_placeholder.jpg',
+            desc: 'Heavy-duty cleats for extreme ice. High bite and stability.',
+            pros: ['Serious bite', 'Replaceable cleats'],
+            cons: ['Not for indoor floors']
+          },
+          {
+            slug: 'yaktrax-run',
+            name: 'Yaktrax RUN',
+            rating: 4.4, snow: 2, wet: 1,
+            img: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Ice_cleats_placeholder.jpg',
+            desc: 'Coil + carbide forefoot system for running on winter paths.',
+            pros: ['Lightweight', 'Easy on/off'],
+            cons: ['Less durable than heavy cleats']
+          },
+          {
+            slug: 'kahtoola-exospikes',
+            name: 'Kahtoola EXOspikes',
+            rating: 4.5, snow: 3, wet: 1,
+            img: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Ice_cleats_placeholder.jpg',
+            desc: 'Carbide spikes with flexible harness. Great mixed trail option.',
+            pros: ['Great mixed-terrain bite', 'Packable'],
+            cons: ['Not for indoor use']
+          }
         ]
       }
     };
@@ -232,6 +348,7 @@
       if (!cat) return;
       categoryTitle.textContent = cat.title;
       shoeList.innerHTML = '';
+
       cat.items.forEach((item) => {
         const fallback =
           key === 'work'
@@ -241,17 +358,25 @@
             : 'https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Casual.jpeg';
         const imgSrc = item.img || fallback;
         const ratingText = (typeof item.rating === 'number') ? item.rating.toFixed(1) : '—';
+
         const li = document.createElement('li');
-        li.className = 'rounded-2xl overflow-hidden border bg-white shadow hover:shadow-lg transition';
+        li.className = 'rounded-2xl overflow-hidden border bg-white shadow hover:shadow-lg transition cursor-pointer';
+        li.onclick = () => showShoe(key, item.slug);
         li.innerHTML = `
           <div class="h-44 bg-gray-100 bg-cover bg-center" style="background-image:url('${imgSrc}')"></div>
           <div class="p-4">
             <h4 class="font-semibold text-lg">${item.name}</h4>
-            <p class="text-sm text-gray-600 mt-1">Traction rating: <span class="font-semibold">${ratingText}</span> / 5</p>
+            <p class="text-sm text-gray-600 mt-1">
+              Traction: <span class="font-semibold">${ratingText}</span> / 5
+              <span class="ml-2">${item.snow ? '❄'.repeat(item.snow) : '—'}</span>
+              <span class="ml-1">${item.wet  ? '💧'.repeat(item.wet)  : '—'}</span>
+            </p>
           </div>`;
         shoeList.appendChild(li);
       });
+
       ratingsSection.classList.add('hidden');
+      document.getElementById('shoeDetail').classList.add('hidden');
       categoryView.classList.remove('hidden');
       window.location.hash = 'categoryView';
     }
@@ -260,6 +385,57 @@
       categoryView.classList.add('hidden');
       ratingsSection.classList.remove('hidden');
       window.location.hash = 'ratings';
+    }
+
+    // -------- Shoe detail helpers --------
+    function getItem(catKey, slug) {
+      const cat = DATA[catKey];
+      if (!cat) return null;
+      return cat.items.find(i => i.slug === slug) || null;
+    }
+
+    function showShoe(catKey, slug) {
+      const item = getItem(catKey, slug);
+      if (!item) return;
+
+      const catTitle = DATA[catKey].title;
+      document.getElementById('shoeBreadcrumb').innerHTML =
+        `<a href="#ratings" class="hover:underline" onclick="closeShoe(); closeCategory();">Ratings</a>
+         <span class="mx-1">/</span>
+         <a href="#categoryView" class="hover:underline" onclick="closeShoe();">${catTitle}</a>
+         <span class="mx-1">/</span>
+         <span class="font-semibold">${item.name}</span>`;
+
+      document.getElementById('shoeHero').style.backgroundImage = `url('${item.img}')`;
+      document.getElementById('shoeName').textContent = item.name;
+      document.getElementById('shoeSnow').textContent = item.snow ? '❄'.repeat(item.snow) : '—';
+      document.getElementById('shoeWet').textContent  = item.wet  ? '💧'.repeat(item.wet)  : '—';
+      document.getElementById('shoeDesc').textContent = item.desc || '';
+
+      const prosUl = document.getElementById('shoePros');
+      const consUl = document.getElementById('shoeCons');
+      prosUl.innerHTML = ''; consUl.innerHTML = '';
+      (item.pros || []).forEach(p => { const li = document.createElement('li'); li.textContent = p; prosUl.appendChild(li); });
+      (item.cons || []).forEach(c => { const li = document.createElement('li'); li.textContent = c; consUl.appendChild(li); });
+
+      const gal = document.getElementById('shoeGallery');
+      gal.innerHTML = '';
+      (item.gallery || []).forEach(src => {
+        const d = document.createElement('div');
+        d.className = 'h-24 bg-center bg-cover rounded-xl border';
+        d.style.backgroundImage = `url('${src}')`;
+        gal.appendChild(d);
+      });
+
+      categoryView.classList.add('hidden');
+      document.getElementById('shoeDetail').classList.remove('hidden');
+      window.location.hash = `shoe-${slug}`;
+    }
+
+    function closeShoe() {
+      document.getElementById('shoeDetail').classList.add('hidden');
+      categoryView.classList.remove('hidden');
+      window.location.hash = 'categoryView';
     }
 
     document.getElementById('year').textContent = new Date().getFullYear();
