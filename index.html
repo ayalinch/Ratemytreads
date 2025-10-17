@@ -277,12 +277,46 @@
     function fmtDate(s){ if(!s) return ''; const d=new Date(s); if(isNaN(d)) return s; return d.toLocaleDateString(); }
 
     // >>> ADDED: tier colours based on snow rating <<<
-    function tierInfo(snow = 0) {
-      if (snow >= 15) return { strip:'#166534', tint:'#f0fdf4', text:'#166534', name:'Very High', chip:'❄❄❄' };
-      if (snow >= 11) return { strip:'#22c55e', tint:'#f0fdf4', text:'#15803d', name:'High',      chip:'❄❄'   };
-      if (snow >= 7)  return { strip:'#f59e0b', tint:'#fffbeb', text:'#b45309', name:'Medium',    chip:'❄'     };
-      return             { strip:'#dc2626', tint:'#fef2f2', text:'#b91c1c', name:'Low',       chip:'—'     };
-    }
+  function tierInfo(snow = 0) {
+  if (snow >= 15) {
+    return {
+      key: 'vh',
+      name: 'Very High',
+      chip: '❄❄❄',
+      strip: '#065f46',   // dark emerald
+      tint:  '#10b98120', // semi-transparent emerald background
+      text:  '#064e3b'
+    };
+  }
+  if (snow >= 11) {
+    return {
+      key: 'hi',
+      name: 'High',
+      chip: '❄❄',
+      strip: '#15803d',   // deep green
+      tint:  '#22c55e30', // translucent bright green
+      text:  '#14532d'
+    };
+  }
+  if (snow >= 7) {
+    return {
+      key: 'med',
+      name: 'Medium',
+      chip: '❄',
+      strip: '#b45309',   // darker amber
+      tint:  '#f59e0b30', // translucent amber
+      text:  '#78350f'
+    };
+  }
+  return {
+    key: 'low',
+    name: 'Low',
+    chip: '—',
+    strip: '#b91c1c',     // bold red
+    tint:  '#ef444430',   // translucent red
+    text:  '#7f1d1d'
+  };
+}
 
     // ---------------- Seed DATA (from your list; you can add more below) ----------------
     const DATA = {
