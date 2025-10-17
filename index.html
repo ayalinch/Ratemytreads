@@ -149,37 +149,8 @@
     </div>
   </section>
 
-  <!-- News / Resources -->
-  <section id="news" class="py-16 bg-gray-50">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl sm:text-4xl font-extrabold">Guides & Investigations</h2>
-      <p class="text-gray-600 mt-2">Curated reads and videos that inform our ratings.</p>
-      <div class="mt-8 grid gap-6 md:grid-cols-3">
-        <a href="https://www.cbc.ca/news/canada/marketplace-boot-test-1.6252613" target="_blank" rel="noopener" class="block rounded-2xl bg-white overflow-hidden shadow hover:shadow-lg transition">
-          <div class="h-40 bg-gray-200 bg-cover bg-center" style="background-image:url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/logos/newsLogo_638215626098456151.png?v=638962568096370112')"></div>
-          <div class="p-6"><h3 class="font-bold text-lg">CBC Marketplace: Winter Boot Grip Test</h3><p class="mt-2 text-sm text-gray-600">Independent ice-traction testing across popular boots.</p></div>
-        </a>
-        <a href="https://www.youtube.com/watch?v=JhUk7qMtcjI&t=25s" target="_blank" rel="noopener" class="block rounded-2xl bg-white overflow-hidden shadow hover:shadow-lg transition">
-          <div class="relative h-40 bg-gray-200 bg-cover bg-center" style="background-image:url('https://img.youtube.com/vi/JhUk7qMtcjI/hqdefault.jpg')">
-            <div class="absolute inset-0 bg-black/25"></div>
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div class="w-14 h-14 rounded-full bg-white/90 shadow flex items-center justify-center">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="text-red-600"><path d="M8 5v14l11-7z"/></svg>
-              </div>
-            </div>
-          </div>
-          <div class="p-6"><h3 class="font-bold text-lg">Video: The Science of Walking on Ice</h3><p class="mt-2 text-sm text-gray-600">A quick explainer on slip mechanics and tread design.</p></div>
-        </a>
-        <a href="https://zoomer.com/health/2020/12/09/bring-on-the-snow-an-expert-guide-to-shopping-for-winter-boots" target="_blank" rel="noopener" class="block rounded-2xl bg-white overflow-hidden shadow hover:shadow-lg transition">
-          <div class="h-40 bg-gray-200 bg-cover bg-center" style="background-image:url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Spike.jpeg')"></div>
-          <div class="p-6"><h3 class="font-bold text-lg">Expert Guide: How to Shop for Winter Boots</h3><p class="mt-2 text-sm text-gray-600">Practical tips for warmth, grip, and comfort.</p></div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <<!-- ======= Site Footer (dark) ======= -->
-<footer class="bg-[#171717] text-gray-200 pt-12" id="site-footer">
+  <!-- ======= Site Footer (dark) ======= -->
+  <footer class="bg-[#171717] text-gray-200 pt-12" id="site-footer">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
     <!-- Newsletter signup -->
@@ -233,7 +204,9 @@
         </ul>
       </div>
 
-     
+      <!-- (empty third column in your original) -->
+    </div>
+
     <!-- Bottom strip -->
     <div class="mt-12 border-t border-white/10">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -303,6 +276,14 @@
     function flakes(n){ if(n>=12) return 3; if(n>=8) return 2; if(n>=4) return 1; return 0; }
     function fmtDate(s){ if(!s) return ''; const d=new Date(s); if(isNaN(d)) return s; return d.toLocaleDateString(); }
 
+    // >>> ADDED: tier colours based on snow rating <<<
+    function tierInfo(snow = 0) {
+      if (snow >= 15) return { strip:'#166534', tint:'#f0fdf4', text:'#166534', name:'Very High', chip:'❄❄❄' };
+      if (snow >= 11) return { strip:'#22c55e', tint:'#f0fdf4', text:'#15803d', name:'High',      chip:'❄❄'   };
+      if (snow >= 7)  return { strip:'#f59e0b', tint:'#fffbeb', text:'#b45309', name:'Medium',    chip:'❄'     };
+      return             { strip:'#dc2626', tint:'#fef2f2', text:'#b91c1c', name:'Low',       chip:'—'     };
+    }
+
     // ---------------- Seed DATA (from your list; you can add more below) ----------------
     const DATA = {
       casual: {
@@ -350,12 +331,7 @@
       }
     };
 
-    // --------- Optional: bulk add more rows here (they’ll auto-slot) ----------
-    const EXTRA_ITEMS = [
-      // Example:
-      // {cat:'casual', slug:'columbia-minx-shorty', name:'Columbia Minx Shorty Omni-Heat', brand:'Columbia', style:'1554051010', snow:0, date:'2017-02-17', img:''},
-      // Paste more objects in this array using the same shape.
-    ];
+    const EXTRA_ITEMS = []; // add more here if you like
     EXTRA_ITEMS.forEach(x => { if (DATA[x.cat]) DATA[x.cat].items.push(x); });
 
     // ---------------- UI wiring ----------------
@@ -401,8 +377,7 @@
       items.sort((a,b) => {
         if (mode === 'new') return new Date(b.date||0) - new Date(a.date||0);
         if (mode === 'az')  return (a.name||'').localeCompare(b.name||'');
-        // best
-        return (b.snow||0) - (a.snow||0);
+        return (b.snow||0) - (a.snow||0); // best
       });
 
       categoryCount.textContent = `${items.length} item${items.length===1?'':'s'}`;
@@ -411,16 +386,20 @@
       shoeList.innerHTML = '';
       items.forEach((item) => {
         const imgSrc = item.img || FALLBACK[currentCat];
-        const snow3  = flakes(item.snow || 0);
+        const t = tierInfo(item.snow || 0); // <<< use tier colours
         const li = document.createElement('li');
         li.className = 'rounded-2xl overflow-hidden border bg-white shadow hover:shadow-lg transition cursor-pointer';
         li.onclick = () => showShoe(currentCat, item.slug);
         li.innerHTML = `
+          <div style="height:4px;background:${t.strip}"></div>
           <div class="h-44 bg-gray-100 bg-cover bg-center" style="background-image:url('${imgSrc}')"></div>
-          <div class="p-4">
+          <div class="p-4" style="background:${t.tint}; border-top:1px solid ${t.strip}33">
             <h4 class="font-semibold text-lg">${item.name}</h4>
             <p class="text-xs text-gray-500">${item.brand||''}${item.style?` • ${item.style}`:''}${item.date?` • ${fmtDate(item.date)}`:''}</p>
-            <p class="text-sm text-gray-700 mt-1">${snow3 ? '❄'.repeat(snow3) : '—'}</p>
+            <div class="mt-2 flex items-center gap-2 text-sm">
+              <span class="font-semibold" style="color:${t.text}">${t.name}</span>
+              <span>${t.chip}</span>
+            </div>
           </div>`;
         shoeList.appendChild(li);
       });
