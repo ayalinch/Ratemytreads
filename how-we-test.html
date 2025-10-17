@@ -5,29 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>How We Test | RateMyTreads</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .hero-bg {
+        background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/winterlab.jpg');
+        background-size: cover; background-position: center;
+      }
+      /* clamp text widths for nicer wrapping */
+      .measure { max-width: 70ch; }
+    </style>
   </head>
   <body class="bg-white text-gray-800">
-    <header class="border-b p-6 flex justify-between items-center">
-      <h1 class="text-2xl font-extrabold">How We Test</h1>
+    <!-- Top bar -->
+    <header class="border-b p-5 md:p-6 flex items-center justify-between">
+      <h1 class="text-xl md:text-2xl font-extrabold tracking-tight">How We Test</h1>
       <a href="index.html" class="text-sm font-semibold underline hover:no-underline">← Back to Ratings</a>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 py-12 space-y-12">
-      <section>
-        <h2 class="text-xl font-bold mb-3">Overview</h2>
-        <p>
-          We combine controlled evaluations with real-world trials. Each pair is reviewed on traction, stability, and usable
-          design factors (fit, warmth, water handling). Scores are normalized to a 0–20 traction index, then mapped to tiers
-          using the legend below. We present two parallel systems: <span class="font-semibold">Snow/Ice</span> and
-          <span class="font-semibold">Wet/Rain</span>.
-        </p>
+    <!-- Skinny hero to set the vibe -->
+    <div class="hero-bg h-[28vh] min-h-[200px] w-full"></div>
+
+    <main class="max-w-6xl mx-auto px-4 py-10 md:py-12 space-y-12">
+      <!-- Overview -->
+      <section class="grid md:grid-cols-3 gap-6 items-start">
+        <div class="md:col-span-2">
+          <h2 class="text-xl font-bold mb-3">Overview</h2>
+          <p class="measure">
+            We combine controlled lane trials with real-world walks. Each pair is scored on traction and stability, with notes
+            on fit, warmth, and water handling. Results are normalized to a 0–20 index and mapped to tiers using the legend.
+            We publish two systems: <span class="font-semibold">Snow/Ice (❄)</span> and <span class="font-semibold">Wet/Rain (💧)</span>.
+          </p>
+        </div>
+        <div class="rounded-2xl border p-4">
+          <h3 class="font-semibold mb-2">Test set</h3>
+          <ul class="text-sm text-gray-700 space-y-1 list-disc ml-5">
+            <li>Surfaces: smooth ice, packed snow, wet pavement</li>
+            <li>Tasks: walk ⇢ heel-strike ⇢ turn ⇢ stop</li>
+            <li>Notes: outsole compound, lug depth & pattern, optional studs</li>
+          </ul>
+        </div>
       </section>
 
       <!-- LEGEND -->
-      <section class="rounded-3xl border p-6">
+      <section class="rounded-3xl border p-5 md:p-6">
         <h3 class="text-xl font-bold mb-4">Legend</h3>
 
-        <!-- Big graphic -->
         <div class="rounded-2xl border shadow-sm overflow-hidden">
           <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
             <!-- grid background -->
@@ -40,101 +61,74 @@
             <!-- frame -->
             <rect x="14" y="14" width="872" height="392" rx="10" fill="none" stroke="#2f3337" stroke-width="6"/>
 
-            <!-- WEDGES (left triangle stack) -->
+            <!-- STACKED BANDS (no overlap) -->
             <!-- LOW (red) -->
-            <polygon points="48,370 560,370 560,336 48,370" fill="#dc2626"/>
-            <!-- MED (yellow) -->
-            <polygon points="48,370 560,370 560,290 48,330" fill="#f59e0b"/>
-            <!-- HIGH (green) -->
-            <polygon points="48,370 560,370 560,245 48,300" fill="#4ade80"/>
+            <polygon points="48,370 560,370 560,356 48,364" fill="#dc2626"/>
+            <!-- MEDIUM (yellow) -->
+            <polygon points="48,364 560,356 560,330 48,342" fill="#f59e0b"/>
+            <!-- HIGH (light green) -->
+            <polygon points="48,342 560,330 560,295 48,315" fill="#22c55e"/>
             <!-- VERY HIGH (dark green) -->
-            <polygon points="48,370 560,370 560,190 48,270" fill="#15803d"/>
+            <polygon points="48,315 560,295 560,250 48,290" fill="#166534"/>
 
             <!-- LEFT TITLE -->
             <g font-family="system-ui,ui-sans-serif" font-weight="800" fill="#2f3337">
-              <text x="58" y="72" font-size="40">LEGEND</text>
+              <text x="58" y="80" font-size="42">LEGEND</text>
             </g>
 
-            <!-- RIGHT PANEL TITLES -->
+            <!-- RIGHT HEADERS -->
             <g font-family="system-ui,ui-sans-serif" font-weight="700" fill="#4b5563">
               <text x="610" y="86" font-size="16">TIERS</text>
               <text x="760" y="86" font-size="16">SNOW / ICE</text>
-              <text x="845" y="86" font-size="16">WET / RAIN</text>
+              <text x="855" y="86" font-size="16">WET / RAIN</text>
             </g>
 
-            <!-- ROW: VERY HIGH -->
-            <g font-family="system-ui,ui-sans-serif" font-weight="700" fill="#374151">
-              <text x="610" y="160" font-size="26">VERY HIGH (≥15)</text>
+            <!-- VERY HIGH -->
+            <g font-family="system-ui,ui-sans-serif" font-weight="800" fill="#374151">
+              <text x="610" y="160" font-size="28">VERY HIGH (≥15)</text>
             </g>
             <g font-family="system-ui,ui-sans-serif" fill="#2563eb">
               <text x="772" y="160" font-size="30">❄❄❄</text>
-              <text x="862" y="160" font-size="30">💧💧💧</text>
+              <text x="870" y="160" font-size="30">💧💧💧</text>
             </g>
 
-            <!-- ROW: HIGH -->
-            <g font-family="system-ui,ui-sans-serif" font-weight="700" fill="#374151">
-              <text x="610" y="220" font-size="26">HIGH (11–14)</text>
+            <!-- HIGH -->
+            <g font-family="system-ui,ui-sans-serif" font-weight="800" fill="#374151">
+              <text x="610" y="220" font-size="28">HIGH (11–14)</text>
             </g>
             <g font-family="system-ui,ui-sans-serif" fill="#2563eb">
               <text x="772" y="220" font-size="30">❄❄</text>
-              <text x="862" y="220" font-size="30">💧💧</text>
+              <text x="870" y="220" font-size="30">💧💧</text>
             </g>
 
-            <!-- ROW: MEDIUM -->
-            <g font-family="system-ui,ui-sans-serif" font-weight="700" fill="#374151">
-              <text x="610" y="280" font-size="26">MEDIUM (7–10)</text>
+            <!-- MEDIUM -->
+            <g font-family="system-ui,ui-sans-serif" font-weight="800" fill="#374151">
+              <text x="610" y="280" font-size="28">MEDIUM (7–10)</text>
             </g>
             <g font-family="system-ui,ui-sans-serif" fill="#2563eb">
               <text x="772" y="280" font-size="30">❄</text>
-              <text x="862" y="280" font-size="30">💧</text>
+              <text x="870" y="280" font-size="30">💧</text>
             </g>
 
-            <!-- ROW: LOW -->
-            <g font-family="system-ui,ui-sans-serif" font-weight="700" fill="#6b7280">
-              <text x="610" y="340" font-size="26">LOW (&lt;7)</text>
+            <!-- LOW -->
+            <g font-family="system-ui,ui-sans-serif" font-weight="800" fill="#6b7280">
+              <text x="610" y="340" font-size="28">LOW (&lt;7)</text>
             </g>
             <g font-family="system-ui,ui-sans-serif" fill="#93c5fd">
-              <!-- faded icons for low -->
               <text x="772" y="340" font-size="30">—</text>
-              <text x="862" y="340" font-size="30">—</text>
+              <text x="870" y="340" font-size="30">—</text>
             </g>
           </svg>
         </div>
 
-        <!-- Text bullets under the graphic -->
-        <div class="mt-6 grid md:grid-cols-2 gap-6">
+        <!-- compact keys below the graphic -->
+        <div class="mt-6 grid lg:grid-cols-2 gap-6">
           <ul class="grid gap-3">
-            <li class="flex items-start gap-3">
-              <span class="inline-block h-3 w-6 rounded-sm mt-1" style="background:#15803d"></span>
-              <div>
-                <p class="font-semibold">Very High (≥15)</p>
-                <p class="text-sm text-gray-600">Confident traction; strong stop/turn stability.</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="inline-block h-3 w-6 rounded-sm mt-1" style="background:#4ade80"></span>
-              <div>
-                <p class="font-semibold">High (11–14)</p>
-                <p class="text-sm text-gray-600">Reliable grip in most winter sidewalks.</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="inline-block h-3 w-6 rounded-sm mt-1" style="background:#f59e0b"></span>
-              <div>
-                <p class="font-semibold">Medium (7–10)</p>
-                <p class="text-sm text-gray-600">OK on packed snow; be cautious on smooth ice.</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="inline-block h-3 w-6 rounded-sm mt-1" style="background:#dc2626"></span>
-              <div>
-                <p class="font-semibold">Low (&lt;7)</p>
-                <p class="text-sm text-gray-600">Limited traction; avoid smooth ice without aids.</p>
-              </div>
-            </li>
+            <li class="flex items-start gap-3"><span class="inline-block h-3 w-6 rounded-sm mt-1" style="background:#166534"></span><div><p class="font-semibold">Very High (≥15)</p><p class="text-sm text-gray-600">Confident traction; strong stop/turn stability.</p></div></li>
+            <li class="flex items-start gap-3"><span class="inline-block h-3 w-6 rounded-sm mt-1" style="background:#22c55e"></span><div><p class="font-semibold">High (11–14)</p><p class="text-sm text-gray-600">Reliable grip in most winter sidewalks.</p></div></li>
+            <li class="flex items-start gap-3"><span class="inline-block h-3 w-6 rounded-sm mt-1" style="background:#f59e0b"></span><div><p class="font-semibold">Medium (7–10)</p><p class="text-sm text-gray-600">OK on packed snow; be cautious on smooth ice.</p></div></li>
+            <li class="flex items-start gap-3"><span class="inline-block h-3 w-6 rounded-sm mt-1" style="background:#dc2626"></span><div><p class="font-semibold">Low (&lt;7)</p><p class="text-sm text-gray-600">Limited traction; avoid smooth ice without aids.</p></div></li>
           </ul>
-
-          <!-- Key for icons -->
           <div class="rounded-2xl border p-4">
             <h4 class="font-semibold mb-2">Icons</h4>
             <p class="text-sm"><span class="font-semibold text-blue-600">❄</span> Snow/Ice traction level</p>
@@ -144,22 +138,24 @@
         </div>
       </section>
 
-      <section>
-        <h3 class="text-xl font-bold mb-3">Equipment</h3>
-        <ul class="list-disc ml-6 space-y-1">
-          <li>Ice/winter surface lane with temperature control</li>
-          <li>Harness for safety during slip trials</li>
-          <li>Task markers for walk / stop / turn cycles</li>
-        </ul>
-      </section>
-
-      <section>
-        <h3 class="text-xl font-bold mb-3">Protocol</h3>
-        <ol class="list-decimal ml-6 space-y-1">
-          <li>Warm-up and sizing check</li>
-          <li>Sequence: walk → heel strike → turn → stop</li>
-          <li>Repeat runs; log slips and recoveries</li>
-        </ol>
+      <!-- Equipment / Protocol (tightened copy) -->
+      <section class="grid md:grid-cols-2 gap-6">
+        <div class="rounded-2xl border p-5">
+          <h3 class="text-xl font-bold mb-2">Equipment</h3>
+          <ul class="list-disc ml-5 text-sm text-gray-700 space-y-1">
+            <li>Temperature-controlled ice/snow lane</li>
+            <li>Safety harness during slip trials</li>
+            <li>Markers for walk / turn / stop cycles</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border p-5">
+          <h3 class="text-xl font-bold mb-2">Protocol</h3>
+          <ol class="list-decimal ml-5 text-sm text-gray-700 space-y-1">
+            <li>Fit check & warm-up</li>
+            <li>Tasks: walk → heel-strike → turn → stop</li>
+            <li>Repeat runs; log slips & recoveries</li>
+          </ol>
+        </div>
       </section>
     </main>
   </body>
