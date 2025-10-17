@@ -9,12 +9,13 @@
     html { scroll-behavior: smooth; }
 
     /* HERO — rotating slideshow */
-    .hero-bg {
-      background-size: cover;
-      background-position: center;
-      animation: heroSlide 24s infinite ease-in-out;
-      transition: background-image 1.5s ease-in-out;
-    }
+  .hero-bg {
+  background-size: cover;
+  background-position: center;
+  animation: heroSlide 24s infinite ease-in-out;
+  transition: background-image 1.5s ease-in-out;
+  filter: blur(3px) brightness(0.8);
+}
 
     @keyframes heroSlide {
       0%, 20% {
