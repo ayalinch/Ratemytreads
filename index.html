@@ -7,13 +7,39 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     html { scroll-behavior: smooth; }
+
+    /* HERO — rotating slideshow */
+    .hero-bg {
+      background-size: cover;
+      background-position: center;
+      animation: heroSlide 24s infinite ease-in-out;
+      transition: background-image 1.5s ease-in-out;
+    }
+
+    @keyframes heroSlide {
+      0%, 20% {
+        background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/landing-banner-01.jpg');
+      }
+      25%, 45% {
+        background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/landing-banner-05.png');
+      }
+      50%, 70% {
+        background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/landing-banner-02.jpg');
+      }
+      75%, 100% {
+        background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/landing-banner-03.jpg');
+      }
+    }
+
+    /* Category cards */
     .card-bg-casual { background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Casual.jpeg'); }
     .card-bg-work   { background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Safety.jpeg'); }
     .card-bg-spikes { background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Spike.jpeg'); }
     .bg-cover-center { background-size: cover; background-position: center; }
   </style>
 </head>
-  <body class="bg-gray-50 text-gray-800 font-sans">
+
+<body class="bg-gray-50 text-gray-800 font-sans">
   <!-- Nav -->
   <header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
     <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
