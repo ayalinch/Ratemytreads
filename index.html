@@ -110,8 +110,9 @@
         <h2 id="categoryTitle" class="text-3xl font-extrabold">Category</h2>
         <button onclick="closeCategory()" class="px-4 py-2 rounded-xl border font-semibold hover:bg-gray-50">← Back</button>
       </div>
-
-      <ul id="shoeList" class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></ul>
+      <!-- Tabs injected here when a category has sub-groups -->
+      <div id="groupTabs" class="mt-4 flex flex-wrap gap-2"></div>
+      <ul id="shoeList" class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></ul>
     </div>
   </section>
 
@@ -206,21 +207,70 @@
     const categoryView = document.getElementById('categoryView');
     const categoryTitle = document.getElementById('categoryTitle');
     const shoeList = document.getElementById('shoeList');
+    const groupTabs = document.getElementById('groupTabs');
 
     function showCategory(key) {
       const cat = DATA[key];
       if (!cat) return;
       categoryTitle.textContent = cat.title;
       shoeList.innerHTML = '';
+      groupTabs.innerHTML = '';
 
-      // If the category has sub-groups, show them as tiles first
-      if (cat.groups) {
-        cat.groups.forEach((group) => {
-          const li = document.createElement('li');
-          li.className = 'rounded-2xl overflow-hidden border bg-white shadow hover:shadow-lg transition cursor-pointer';
-          li.onclick = () => renderGroup(group);
-          li.innerHTML = `
-            <div class="h-44 bg-gray-100 bg-cover bg-center" style="background-image:url('${group.items?.[0]?.img || 'assets/casual.jpg'}')"></div>
+      // If the category has sub-groups, show TABS and immediately render the first group's items
+      if (cat.groups && cat.groups.length) {
+        cat.groups.forEach((group, idx) => {
+          const btn = document.createElement('button');
+          btn.className = 'px-3 py-2 rounded-xl border text-sm font-semibold hover:bg-gray-50';
+          btn.textContent = group.title;
+          btn.dataset.index = idx;
+          btn.onclick = () => {
+            setActiveTab(idx);
+            renderGroup(cat.groups[idx]);
+          };
+          groupTabs.appendChild(btn);
+        });
+        // Activate first tab by default
+        setActiveTab(0);
+        renderGroup(cat.groups[0]);
+      } else if (cat.items) {
+        // Flat list category: render immediately like before
+        renderItems(cat.items);
+      }
+
+      ratingsSection.classList.add('hidden');
+      categoryView.classList.remove('hidden');
+      window.location.hash = 'categoryView';
+    }
+
+    function setActiveTab(activeIdx) {
+      [...groupTabs.children].forEach((btn, idx) => {
+        btn.className = 'px-3 py-2 rounded-xl border text-sm font-semibold ' + (idx === activeIdx ? 'bg-gray-900 text-white border-gray-900' : 'hover:bg-gray-50');
+      });
+    }
+
+    function renderGroup(group) {
+      categoryTitle.textContent = group.title;
+      shoeList.innerHTML = '';
+      renderItems(group.items || []);
+    }
+
+    function renderItems(items) {
+      if (!items || !items.length) {
+        shoeList.innerHTML = '<li class="text-sm text-gray-500">No shoes added yet for this group.</li>';
+        return;
+      }
+      items.forEach((item) => {
+        const li = document.createElement('li');
+        li.className = 'rounded-2xl overflow-hidden border bg-white shadow hover:shadow-lg transition';
+        li.innerHTML = `
+          <div class="h-44 bg-gray-100 bg-cover bg-center" style="background-image:url('${item.img}')"></div>
+          <div class="p-4">
+            <h4 class="font-semibold text-lg">${item.name}</h4>
+            <p class="text-sm text-gray-600 mt-1">Traction rating: <span class="font-semibold">${(item.rating ?? 0).toFixed(1)}</span> / 5</p>
+          </div>`;
+        shoeList.appendChild(li);
+      });
+    }')"></div>
             <div class="p-4">
               <h4 class="font-semibold text-lg">${group.title}</h4>
               <p class="text-sm text-gray-600 mt-1">Tap to view shoes and traction scores</p>
@@ -277,4 +327,5 @@
   </script>
 </body>
 </html>
+
 
