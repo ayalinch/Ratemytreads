@@ -15,36 +15,133 @@
     <main class="max-w-6xl mx-auto px-4 py-12 space-y-12">
       <section>
         <h2 class="text-xl font-bold mb-3">Overview</h2>
-        <p>We combine controlled evaluations with real-world trials. Each pair is reviewed on traction, stability, and usable design factors (fit, warmth, water handling). Scores are normalized to a 0–20 traction index, then mapped to simple tiers using the legend below.</p>
+        <p>
+          We combine controlled evaluations with real-world trials. Each pair is reviewed on traction, stability, and usable
+          design factors (fit, warmth, water handling). Scores are normalized to a 0–20 traction index, then mapped to tiers
+          using the legend below. We present two parallel systems: <span class="font-semibold">Snow/Ice</span> and
+          <span class="font-semibold">Wet/Rain</span>.
+        </p>
       </section>
 
-      <!-- Insert the LEGEND SVG here -->
+      <!-- LEGEND -->
       <section class="rounded-3xl border p-6">
         <h3 class="text-xl font-bold mb-4">Legend</h3>
-        <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
-          <defs>
-            <pattern id="grid" width="16" height="16" patternUnits="userSpaceOnUse">
-              <path d="M16 0H0V16" fill="none" stroke="#e5e7eb" stroke-width="1" />
-            </pattern>
-          </defs>
-          <rect x="0" y="0" width="640" height="360" fill="url(#grid)" />
-          <rect x="12" y="12" width="616" height="336" fill="none" stroke="#374151" stroke-width="6" rx="8" />
-          <polygon points="40,320 600,320 600,290 40,320" fill="#dc2626" />
-          <polygon points="40,320 600,320 600,250 40,300" fill="#f59e0b" />
-          <polygon points="40,320 600,320 600,210 40,280" fill="#4ade80" />
-          <polygon points="40,320 600,320 600,160 40,260" fill="#22c55e" />
-          <g font-family="system-ui,ui-sans-serif" font-weight="700" fill="#374151">
-            <text x="420" y="180" font-size="24">VERY HIGH (≥15)</text>
-            <text x="420" y="220" font-size="28" fill="#2563eb">❄❄❄</text>
-            <text x="420" y="250" font-size="24">HIGH (11–14)</text>
-            <text x="420" y="288" font-size="28" fill="#2563eb">❄❄</text>
-            <text x="420" y="318" font-size="24">MEDIUM (7–10)</text>
-            <text x="420" y="350" font-size="28" fill="#2563eb">❄</text>
-          </g>
-          <g font-family="system-ui,ui-sans-serif" font-weight="700" fill="#6b7280">
-            <text x="420" y="345" font-size="24">LOW (&lt;7)</text>
-          </g>
-        </svg>
+
+        <!-- Big graphic -->
+        <div class="rounded-2xl border shadow-sm overflow-hidden">
+          <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+            <!-- grid background -->
+            <defs>
+              <pattern id="grid" width="16" height="16" patternUnits="userSpaceOnUse">
+                <path d="M16 0H0V16" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+              </pattern>
+            </defs>
+            <rect x="0" y="0" width="900" height="420" fill="url(#grid)"/>
+            <!-- frame -->
+            <rect x="14" y="14" width="872" height="392" rx="10" fill="none" stroke="#2f3337" stroke-width="6"/>
+
+            <!-- WEDGES (left triangle stack) -->
+            <!-- LOW (red) -->
+            <polygon points="48,370 560,370 560,336 48,370" fill="#dc2626"/>
+            <!-- MED (yellow) -->
+            <polygon points="48,370 560,370 560,290 48,330" fill="#f59e0b"/>
+            <!-- HIGH (green) -->
+            <polygon points="48,370 560,370 560,245 48,300" fill="#4ade80"/>
+            <!-- VERY HIGH (dark green) -->
+            <polygon points="48,370 560,370 560,190 48,270" fill="#15803d"/>
+
+            <!-- LEFT TITLE -->
+            <g font-family="system-ui,ui-sans-serif" font-weight="800" fill="#2f3337">
+              <text x="58" y="72" font-size="40">LEGEND</text>
+            </g>
+
+            <!-- RIGHT PANEL TITLES -->
+            <g font-family="system-ui,ui-sans-serif" font-weight="700" fill="#4b5563">
+              <text x="610" y="86" font-size="16">TIERS</text>
+              <text x="760" y="86" font-size="16">SNOW / ICE</text>
+              <text x="845" y="86" font-size="16">WET / RAIN</text>
+            </g>
+
+            <!-- ROW: VERY HIGH -->
+            <g font-family="system-ui,ui-sans-serif" font-weight="700" fill="#374151">
+              <text x="610" y="160" font-size="26">VERY HIGH (≥15)</text>
+            </g>
+            <g font-family="system-ui,ui-sans-serif" fill="#2563eb">
+              <text x="772" y="160" font-size="30">❄❄❄</text>
+              <text x="862" y="160" font-size="30">💧💧💧</text>
+            </g>
+
+            <!-- ROW: HIGH -->
+            <g font-family="system-ui,ui-sans-serif" font-weight="700" fill="#374151">
+              <text x="610" y="220" font-size="26">HIGH (11–14)</text>
+            </g>
+            <g font-family="system-ui,ui-sans-serif" fill="#2563eb">
+              <text x="772" y="220" font-size="30">❄❄</text>
+              <text x="862" y="220" font-size="30">💧💧</text>
+            </g>
+
+            <!-- ROW: MEDIUM -->
+            <g font-family="system-ui,ui-sans-serif" font-weight="700" fill="#374151">
+              <text x="610" y="280" font-size="26">MEDIUM (7–10)</text>
+            </g>
+            <g font-family="system-ui,ui-sans-serif" fill="#2563eb">
+              <text x="772" y="280" font-size="30">❄</text>
+              <text x="862" y="280" font-size="30">💧</text>
+            </g>
+
+            <!-- ROW: LOW -->
+            <g font-family="system-ui,ui-sans-serif" font-weight="700" fill="#6b7280">
+              <text x="610" y="340" font-size="26">LOW (&lt;7)</text>
+            </g>
+            <g font-family="system-ui,ui-sans-serif" fill="#93c5fd">
+              <!-- faded icons for low -->
+              <text x="772" y="340" font-size="30">—</text>
+              <text x="862" y="340" font-size="30">—</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Text bullets under the graphic -->
+        <div class="mt-6 grid md:grid-cols-2 gap-6">
+          <ul class="grid gap-3">
+            <li class="flex items-start gap-3">
+              <span class="inline-block h-3 w-6 rounded-sm mt-1" style="background:#15803d"></span>
+              <div>
+                <p class="font-semibold">Very High (≥15)</p>
+                <p class="text-sm text-gray-600">Confident traction; strong stop/turn stability.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="inline-block h-3 w-6 rounded-sm mt-1" style="background:#4ade80"></span>
+              <div>
+                <p class="font-semibold">High (11–14)</p>
+                <p class="text-sm text-gray-600">Reliable grip in most winter sidewalks.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="inline-block h-3 w-6 rounded-sm mt-1" style="background:#f59e0b"></span>
+              <div>
+                <p class="font-semibold">Medium (7–10)</p>
+                <p class="text-sm text-gray-600">OK on packed snow; be cautious on smooth ice.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="inline-block h-3 w-6 rounded-sm mt-1" style="background:#dc2626"></span>
+              <div>
+                <p class="font-semibold">Low (&lt;7)</p>
+                <p class="text-sm text-gray-600">Limited traction; avoid smooth ice without aids.</p>
+              </div>
+            </li>
+          </ul>
+
+          <!-- Key for icons -->
+          <div class="rounded-2xl border p-4">
+            <h4 class="font-semibold mb-2">Icons</h4>
+            <p class="text-sm"><span class="font-semibold text-blue-600">❄</span> Snow/Ice traction level</p>
+            <p class="text-sm mt-1"><span class="font-semibold">💧</span> Wet/Rain traction level</p>
+            <p class="text-xs text-gray-500 mt-2">Counts indicate relative performance within each system.</p>
+          </div>
+        </div>
       </section>
 
       <section>
