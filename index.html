@@ -1,189 +1,198 @@
-import os, zipfile, textwrap, json
-
-root = "/mnt/data/ratemytreads_site"
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RateMyTreads</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    html { scroll-behavior: smooth; }
+    /* Hero background image: place your file at /assets/landing-banner.jpg */
+    .hero-bg { background-image: url('assets/landing-banner.jpg'); }
+    .card-bg-casual { background-image: url('assets/casual.jpg'); }
+    .card-bg-work   { background-image: url('assets/work.jpg'); }
+    .card-bg-spikes { background-image: url('assets/spikes.jpg'); }
+    .bg-cover-center { background-size: cover; background-position: center; }
+  </style>
 </head>
-<body class="bg-white text-slate-900">
-  <nav class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center gap-6">
-      <a href="index.html" class="flex items-center gap-2">
-        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="1.5" d="M12 3v3m7 5-4 7H9l-4-7m14 0H5m14 0-2-5M5 11l2-5" /></svg>
-        <span class="font-semibold">RateMyTreads</span>
-      </a>
-      <a href="ratings.html" class="ml-auto font-semibold hover:text-kite">Footwear Ratings</a>
-    </div>
-  </nav>
-
-  <!-- Split hero (short copy) -->
-  <header class="max-w-7xl mx-auto px-6 py-12">
-    <div class="grid md:grid-cols-2 gap-8 items-center">
-      <div>
-        <h1 class="headline text-5xl md:text-6xl tracking-tight">Simple, trustworthy ice traction scores</h1>
-        <p class="mt-3 text-lg text-slate-700">Tested on cold & wet ice. Shown as 1–3 snowflakes.</p>
-        <div class="mt-6 flex gap-3">
-          <a class="btn-kite px-5 py-3 rounded-lg font-semibold" href="ratings.html">Explore Ratings</a>
-          <a class="border border-slate-300 px-5 py-3 rounded-lg font-semibold" href="#learn">How it works</a>
-        </div>
+<body class="bg-white text-gray-800 font-sans">
+  <!-- Nav -->
+  <header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
+    <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+      <a href="#" class="text-xl font-black tracking-tight">RateMyTreads</a>
+      <div class="hidden sm:flex items-center gap-6 text-sm font-medium">
+        <a href="#ratings" class="hover:text-black/70">Ratings</a>
+        <a href="#news" class="hover:text-black/70">News</a>
+        <a href="#about" class="hover:text-black/70">About</a>
       </div>
-      <div class="rounded-3xl overflow-hidden shadow-lg">
-        <video autoplay muted loop playsinline class="w-full h-full object-cover">
-          <source src="https://www.kite-uhn.com/Content/videos/labs_video.mp4" type="video/mp4" />
-        </video>
-      </div>
-    </div>
+    </nav>
   </header>
 
-  <main class="max-w-7xl mx-auto px-6 space-y-16">
-    <!-- How we test / How we rank (minimal wording) -->
-    <section id="learn" class="grid md:grid-cols-2 gap-8">
-      <article class="relative rounded-3xl overflow-hidden shadow-lg">
-        <img src="https://images.unsplash.com/photo-1562119250-0b2f1eed5f18?q=80&w=1600&auto=format&fit=crop" class="w-full h-96 object-cover" alt="Testing on ice">
-        <div class="card-overlay"></div>
-        <div class="absolute bottom-0 p-6 text-white">
-          <div class="kicker">Testing</div>
-          <h3 class="headline text-3xl mt-1">MAA on cold & wet ice</h3>
-          <p class="mt-2 max-w-xl text-slate-100">Ascent + descent. COF = tan(MAA).</p>
-        </div>
-      </article>
-      <article class="relative rounded-3xl overflow-hidden shadow-lg">
-        <img src="https://images.unsplash.com/photo-1617134468423-6f579a6561d2?q=80&w=1600&auto=format&fit=crop" class="w-full h-96 object-cover" alt="Ranking explanation">
-        <div class="card-overlay"></div>
-        <div class="absolute bottom-0 p-6 text-white">
-          <div class="kicker">Ranking</div>
-          <h3 class="headline text-3xl mt-1">1–3 snowflakes</h3>
-          <p class="mt-2">❄ Basic · ❄❄ Everyday · ❄❄❄ High traction</p>
-        </div>
-      </article>
-    </section>
-
-    <!-- View options (category tiles) -->
-    <section>
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="headline text-3xl">View options</h2>
-        <a href="ratings.html" class="arrow-link font-semibold text-kite">See all
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5l7 7-7 7" stroke-width="1.5"/></svg>
-        </a>
-      </div>
-      <div class="grid md:grid-cols-3 gap-6">
-        <a class="relative rounded-3xl overflow-hidden shadow-lg block group" href="ratings.html?category=casual#grid">
-          <img src="https://images.unsplash.com/photo-1542219550-87d6c4f3b6b0?q=80&w=1600&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Casual">
-          <div class="card-overlay"></div>
-          <div class="absolute bottom-0 p-6 text-white">
-            <h3 class="headline text-2xl">Casual</h3>
-            <div class="opacity-90">Sidewalks & slush</div>
-          </div>
-        </a>
-        <a class="relative rounded-3xl overflow-hidden shadow-lg block group" href="ratings.html?category=work#grid">
-          <img src="https://images.unsplash.com/photo-1562119250-0b2f1eed5f18?q=80&w=1600&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Work safety">
-          <div class="card-overlay"></div>
-          <div class="absolute bottom-0 p-6 text-white">
-            <h3 class="headline text-2xl">Work Safety</h3>
-            <div class="opacity-90">CSA-rated boots</div>
-          </div>
-        </a>
-        <a class="relative rounded-3xl overflow-hidden shadow-lg block group" href="ratings.html?category=spikes#grid">
-          <img src="https://images.unsplash.com/photo-1617134468423-6f579a6561d2?q=80&w=1600&auto=format&fit=crop" class="w-full h-72 object-cover" alt="Spikes">
-          <div class="card-overlay"></div>
-          <div class="absolute bottom-0 p-6 text-white">
-            <h3 class="headline text-2xl">Spikes</h3>
-            <div class="opacity-90">Trails & ice</div>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <!-- Latest News (blue accents) -->
-    <section>
-      <h2 class="headline text-3xl mb-6">Latest News</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <article class="card-news border shadow-soft">
-          <figure><img src="https://images.unsplash.com/photo-1542574271-7f3b92e6c821?q=80&w=1600&auto=format&fit=crop" alt="CBC marketplace"/></figure>
-          <div class="p-5 space-y-3">
-            <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/c/c0/CBC_Logo_1992-Present.svg" alt="CBC logo">
-            <h3 class="text-xl font-extrabold">Marketplace: which boots will keep you winter safe?</h3>
-            <a class="more" href="#" target="_blank">More info
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5l7 7-7 7" stroke-width="1.5"/></svg>
-            </a>
-          </div>
-        </article>
-        <article class="card-news border shadow-soft">
-          <figure><img src="https://images.unsplash.com/photo-1513438205128-16af156b016a?q=80&w=1600&auto=format&fit=crop" alt="Health tech"/></figure>
-          <div class="p-5 space-y-3">
-            <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/4/4e/CBC_News_Logo.svg" alt="CBC News logo">
-            <h3 class="text-xl font-extrabold">Vital signs: winter footwear traction in the spotlight</h3>
-            <a class="more" href="#" target="_blank">More info
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5l7 7-7 7" stroke-width="1.5"/></svg>
-            </a>
-          </div>
-        </article>
-        <article class="card-news border shadow-soft">
-          <figure><img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1600&auto=format&fit=crop" alt="Zoomer guide"/></figure>
-          <div class="p-5 space-y-3">
-            <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Zoomer_logo.svg" alt="Zoomer">
-            <h3 class="text-xl font-extrabold">Everything Zoomer guide to winter boots</h3>
-            <a class="more" href="#" target="_blank">More info
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5l7 7-7 7" stroke-width="1.5"/></svg>
-            </a>
-          </div>
-        </article>
-      </div>
-    </section>
-  </main>
-
-  <!-- Colorful end band inspired by the reference "third image" -->
-  <section class="footer-dark mt-16">
-    <div class="max-w-7xl mx-auto px-6 py-12 space-y-10">
-      <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Rate_My_Treads_logo.png" alt="Rate My Treads" class="h-10 hidden" />
-        <h3 class="text-2xl font-extrabold">Subscribe for updates</h3>
-        <div class="flex-1"></div>
-        <form onsubmit="event.preventDefault();" class="flex w-full md:w-auto gap-3">
-          <input placeholder="Name" class="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/60 w-full md:w-56">
-          <input placeholder="Email" type="email" class="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/60 w-full md:w-64">
-          <button class="btn-kite px-5 py-2 rounded-lg font-semibold">Subscribe</button>
-        </form>
-      </div>
-
-      <p class="muted text-sm">Information here is for awareness and not a substitute for professional advice. Boots are tested in new condition.</p>
-
-      <div class="grid md:grid-cols-3 gap-8">
-        <div>
-          <h4 class="font-semibold mb-2">Contact</h4>
-          <div class="muted text-sm space-y-1">
-            <div>Phone: (416) 597‑3422 x7227</div>
-            <div>Email: ratemytreads@uhn.ca</div>
-            <div>Address: 550 University Ave, Toronto, ON</div>
-          </div>
-        </div>
-        <div>
-          <h4 class="font-semibold mb-2">KITE @ UHN</h4>
-          <ul class="muted text-sm space-y-1">
-            <li><a href="#" class="hover:text-white">About KITE</a></li>
-            <li><a href="#" class="hover:text-white">Facilities</a></li>
-            <li><a href="#" class="hover:text-white">Virtual Tour</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="font-semibold mb-2">WinterLab Photos</h4>
-          <div class="grid grid-cols-4 gap-2">
-            {"".join([f'<img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=400&auto=format&fit=crop" class="rounded-md h-16 w-full object-cover" alt="">' for _ in range(8)])}
-          </div>
-        </div>
-      </div>
-
-      <div class="border-t border-white/10 pt-4 text-sm muted">© <span id="y"></span> RateMyTreads. All rights reserved.</div>
+  <!-- Hero -->
+  <section class="hero-bg bg-cover-center min-h-[80vh] flex items-center justify-center relative mt-16">
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="relative z-10 text-center text-white px-6">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">Real‑World Winter Footwear Ratings</h1>
+      <p class="mt-4 max-w-2xl mx-auto text-lg sm:text-xl">Simple. Visual. Evidence‑informed rankings so you can stay upright on ice.</p>
+      <a href="#ratings" class="inline-block mt-8 px-6 py-3 rounded-2xl bg-white text-gray-900 font-semibold shadow hover:shadow-lg">Browse Ratings</a>
     </div>
   </section>
 
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+  <!-- Ratings Categories -->
+  <section id="ratings" class="py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-center text-3xl sm:text-4xl font-extrabold">Footwear Ratings</h2>
+      <p class="text-center mt-2 text-gray-600">Pick a category to see shoe lists and scores.</p>
+
+      <div class="mt-10 grid gap-8 md:grid-cols-3">
+        <!-- Casual -->
+        <button onclick="showCategory('casual')" class="group text-left">
+          <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 card-bg-casual bg-cover-center">
+            <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
+            <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Casual Footwear</h3>
+            <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
+              <span class="font-bold">Ratings</span>
+              <span aria-hidden>→</span>
+            </div>
+          </div>
+        </button>
+
+        <!-- Work Safety -->
+        <button onclick="showCategory('work')" class="group text-left">
+          <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 card-bg-work bg-cover-center">
+            <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
+            <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Work Safety Footwear</h3>
+            <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
+              <span class="font-bold">Ratings</span>
+              <span aria-hidden>→</span>
+            </div>
+          </div>
+        </button>
+
+        <!-- Spikes -->
+        <button onclick="showCategory('spikes')" class="group text-left">
+          <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 card-bg-spikes bg-cover-center">
+            <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
+            <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Spikes</h3>
+            <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
+              <span class="font-bold">Ratings</span>
+              <span aria-hidden>→</span>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category List View -->
+  <section id="categoryView" class="hidden py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between gap-4">
+        <h2 id="categoryTitle" class="text-3xl font-extrabold">Category</h2>
+        <button onclick="closeCategory()" class="px-4 py-2 rounded-xl border font-semibold hover:bg-gray-50">← Back</button>
+      </div>
+
+      <ul id="shoeList" class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></ul>
+    </div>
+  </section>
+
+  <!-- News / Resources -->
+  <section id="news" class="py-16 bg-gray-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl sm:text-4xl font-extrabold">Guides & Investigations</h2>
+      <p class="text-gray-600 mt-2">Curated reads and videos that inform our ratings.</p>
+
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        <a href="https://www.cbc.ca/news/canada/marketplace-boot-test-1.6252613" target="_blank" rel="noopener" class="block rounded-2xl bg-white p-6 shadow hover:shadow-lg transition">
+          <h3 class="font-bold text-lg">CBC Marketplace: Winter Boot Grip Test</h3>
+          <p class="mt-2 text-sm text-gray-600">Independent ice‑traction testing across popular boots.</p>
+        </a>
+        <a href="https://www.youtube.com/watch?v=JhUk7qMtcjI&t=25s" target="_blank" rel="noopener" class="block rounded-2xl bg-white p-6 shadow hover:shadow-lg transition">
+          <h3 class="font-bold text-lg">Video: The Science of Walking on Ice</h3>
+          <p class="mt-2 text-sm text-gray-600">A quick explainer on slip mechanics and tread design.</p>
+        </a>
+        <a href="https://zoomer.com/health/2020/12/09/bring-on-the-snow-an-expert-guide-to-shopping-for-winter-boots" target="_blank" rel="noopener" class="block rounded-2xl bg-white p-6 shadow hover:shadow-lg transition">
+          <h3 class="font-bold text-lg">Expert Guide: How to Shop for Winter Boots</h3>
+          <p class="mt-2 text-sm text-gray-600">Practical tips for warmth, grip, and comfort.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-16">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold">About RateMyTreads</h2>
+      <p class="mt-4 text-gray-700">A simple, evidence‑informed hub that turns lab‑grade insights about ice traction and stability into clear footwear rankings you can use today.</p>
+    </div>
+  </section>
+
+  <footer class="py-8 border-t text-center text-sm text-gray-500">
+    <p>© <span id="year"></span> RateMyTreads</p>
+  </footer>
+
+  <script>
+    // Data: replace/extend with your real inventory and images
+    const DATA = {
+      casual: {
+        title: 'Casual Footwear',
+        items: [
+          { name: 'Sorel Caribou', rating: 4.5, img: 'assets/items/sorel-caribou.jpg' },
+          { name: 'Merrell Thermo Chill', rating: 4.2, img: 'assets/items/merrell-thermo.jpg' },
+          { name: 'Columbia Bugaboot', rating: 4.0, img: 'assets/items/columbia-buga.jpg' },
+        ]
+      },
+      work: {
+        title: 'Work Safety Footwear',
+        items: [
+          { name: 'KEEN Utility Detroit XT', rating: 4.3, img: 'assets/items/keen-detroit.jpg' },
+          { name: 'Terra Gantry IceFX', rating: 4.6, img: 'assets/items/terra-gantry.jpg' },
+          { name: 'Timberland PRO Boondock', rating: 4.1, img: 'assets/items/boondock.jpg' },
+        ]
+      },
+      spikes: {
+        title: 'Spikes & Traction Aids',
+        items: [
+          { name: 'STABILicers MAXX', rating: 4.7, img: 'assets/items/stabilicers-maxx.jpg' },
+          { name: 'Yaktrax RUN', rating: 4.4, img: 'assets/items/yaktrax-run.jpg' },
+          { name: 'Kahtoola EXOspikes', rating: 4.5, img: 'assets/items/kahtoola-exo.jpg' },
+        ]
+      }
+    };
+
+    const ratingsSection = document.getElementById('ratings');
+    const categoryView = document.getElementById('categoryView');
+    const categoryTitle = document.getElementById('categoryTitle');
+    const shoeList = document.getElementById('shoeList');
+
+    function showCategory(key) {
+      const cat = DATA[key];
+      if (!cat) return;
+      categoryTitle.textContent = cat.title;
+      shoeList.innerHTML = '';
+      cat.items.forEach((item) => {
+        const li = document.createElement('li');
+        li.className = 'rounded-2xl overflow-hidden border bg-white shadow hover:shadow-lg transition';
+        li.innerHTML = `
+          <div class="h-44 bg-gray-100 bg-cover bg-center" style="background-image:url('${item.img}')"></div>
+          <div class="p-4">
+            <h4 class="font-semibold text-lg">${item.name}</h4>
+            <p class="text-sm text-gray-600 mt-1">Traction rating: <span class="font-semibold">${item.rating.toFixed(1)}</span> / 5</p>
+          </div>`;
+        shoeList.appendChild(li);
+      });
+      ratingsSection.classList.add('hidden');
+      categoryView.classList.remove('hidden');
+      window.location.hash = 'categoryView';
+    }
+
+    function closeCategory() {
+      categoryView.classList.add('hidden');
+      ratingsSection.classList.remove('hidden');
+      window.location.hash = 'ratings';
+    }
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
-
