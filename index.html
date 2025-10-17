@@ -7,7 +7,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     html { scroll-behavior: smooth; }
-    /* Hero background image: place your file at /assets/landing-banner.jpg */
     .hero-bg { background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/winterlab.jpg'); }
     .card-bg-casual { background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Casual.jpeg'); }
     .card-bg-work   { background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Safety.jpeg'); }
@@ -22,6 +21,7 @@
       <a href="#" class="text-xl font-black tracking-tight">RateMyTreads</a>
       <div class="hidden sm:flex items-center gap-6 text-sm font-medium">
         <a href="#ratings" class="hover:text-black/70">Ratings</a>
+        <a href="how-we-test.html" class="hover:text-black/70">How We Test</a>
         <a href="#news" class="hover:text-black/70">News</a>
         <a href="#about" class="hover:text-black/70">About</a>
       </div>
@@ -32,8 +32,8 @@
   <section class="hero-bg bg-cover-center min-h-[80vh] flex items-center justify-center relative mt-16">
     <div class="absolute inset-0 bg-black/40"></div>
     <div class="relative z-10 text-center text-white px-6">
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">Real‑World Winter Footwear Ratings</h1>
-      <p class="mt-4 max-w-2xl mx-auto text-lg sm:text-xl">Simple. Visual. Evidence‑informed rankings so you can stay upright on ice.</p>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">Real-World Winter Footwear Ratings</h1>
+      <p class="mt-4 max-w-2xl mx-auto text-lg sm:text-xl">Simple. Visual. Evidence-informed rankings so you can stay upright on ice.</p>
       <a href="#ratings" class="inline-block mt-8 px-6 py-3 rounded-2xl bg-white text-gray-900 font-semibold shadow hover:shadow-lg">Browse Ratings</a>
     </div>
   </section>
@@ -44,101 +44,64 @@
       <h2 class="text-center text-3xl sm:text-4xl font-extrabold">Footwear Ratings</h2>
       <p class="text-center mt-2 text-gray-600">Pick a category to see shoe lists and scores.</p>
 
-      <!-- How ratings are done -->
+      <!-- How ratings are done (figures) -->
       <div class="mx-auto max-w-6xl mt-10">
         <div class="grid gap-8 md:grid-cols-3">
           <!-- FIGURE 1: Lab testing -->
           <div class="rounded-3xl border bg-white p-8 shadow-sm hover:shadow-md transition flex flex-col items-center text-center">
             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-40 h-40">
               <g stroke="currentColor" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-                <!-- bench -->
                 <path d="M20 170 H180"/>
-                <!-- beaker -->
                 <rect x="60" y="40" width="80" height="90" rx="8"/>
-                <path d="M60 70 H140"/>
-                <path d="M60 100 H140"/>
-                <!-- fluid -->
+                <path d="M60 70 H140"/><path d="M60 100 H140"/>
                 <path d="M65 120 Q100 135 135 120" fill="currentColor" opacity="0.08"/>
-                <!-- flask with stopper -->
-                <path d="M95 40 v-12 h10 v12"/>
-                <path d="M85 130 L100 170 L120 170 L135 130"/>
-                <!-- bubbles -->
-                <circle cx="120" cy="60" r="4"/>
-                <circle cx="130" cy="50" r="3"/>
+                <path d="M95 40 v-12 h10 v12"/><path d="M85 130 L100 170 L120 170 L135 130"/>
+                <circle cx="120" cy="60" r="4"/><circle cx="130" cy="50" r="3"/>
               </g>
             </svg>
-            <h3 class="mt-5 font-bold text-lg">Lab‑informed criteria</h3>
-            <p class="mt-2 text-sm text-gray-600">Grip on ice/snow, heel‑to‑toe stability, outsole compound, tread geometry, and optional studs.</p>
+            <h3 class="mt-5 font-bold text-lg">Lab-informed criteria</h3>
+            <p class="mt-2 text-sm text-gray-600">Grip on ice/snow, heel-to-toe stability, outsole compound, tread geometry, and optional studs.</p>
           </div>
 
           <!-- FIGURE 2: Field walking -->
           <div class="rounded-3xl border bg-white p-8 shadow-sm hover:shadow-md transition flex flex-col items-center text-center">
             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-40 h-40">
               <g stroke="currentColor" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-                <!-- ground/ice -->
                 <path d="M20 170 H180"/>
-                <!-- stick figure -->
-                <circle cx="100" cy="60" r="14"/>
-                <path d="M100 74 V110"/>
-                <path d="M100 90 L78 110"/>
-                <path d="M100 90 L122 102"/>
-                <!-- legs (one slipping forward) -->
-                <path d="M100 110 L82 150"/>
-                <path d="M100 110 L128 150"/>
-                <!-- boot soles -->
-                <path d="M74 152 h18"/>
-                <path d="M120 152 h18"/>
-                <!-- slip marks -->
-                <path d="M140 150 q10 -8 20 -2" opacity="0.3"/>
-                <path d="M60 150 q-10 8 -20 2" opacity="0.3"/>
-                <!-- flakes/rain drops to imply conditions -->
-                <path d="M30 40 l6 6 m-6 0 l6 -6" opacity="0.4"/>
-                <path d="M160 36 l6 6 m-6 0 l6 -6" opacity="0.4"/>
+                <circle cx="100" cy="60" r="14"/><path d="M100 74 V110"/>
+                <path d="M100 90 L78 110"/><path d="M100 90 L122 102"/>
+                <path d="M100 110 L82 150"/><path d="M100 110 L128 150"/>
+                <path d="M74 152 h18"/><path d="M120 152 h18"/>
               </g>
             </svg>
             <h3 class="mt-5 font-bold text-lg">Field observations</h3>
-            <p class="mt-2 text-sm text-gray-600">Real‑world walking on slick surfaces; notes on warmth, fit, and water resistance.</p>
+            <p class="mt-2 text-sm text-gray-600">Real-world walking on slick surfaces; notes on warmth, fit, and water resistance.</p>
           </div>
 
           <!-- FIGURE 3: External evidence -->
           <div class="rounded-3xl border bg-white p-8 shadow-sm hover:shadow-md transition flex flex-col items-center text-center">
             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-40 h-40">
               <g stroke="currentColor" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-                <!-- clipboard -->
-                <rect x="50" y="34" width="100" height="132" rx="10"/>
-                <rect x="80" y="24" width="40" height="20" rx="6"/>
-                <!-- check rows -->
-                <path d="M70 80 l10 10 l16 -16"/>
-                <path d="M70 110 l10 10 l16 -16"/>
-                <path d="M70 140 l10 10 l16 -16"/>
-                <!-- lines -->
-                <path d="M110 86 H140"/>
-                <path d="M110 116 H140"/>
-                <path d="M110 146 H140"/>
-                <!-- external link motif -->
-                <path d="M120 54 h18 v18"/>
-                <path d="M138 54 L118 74"/>
+                <rect x="50" y="34" width="100" height="132" rx="10"/><rect x="80" y="24" width="40" height="20" rx="6"/>
+                <path d="M70 80 l10 10 l16 -16"/><path d="M70 110 l10 10 l16 -16"/><path d="M70 140 l10 10 l16 -16"/>
+                <path d="M110 86 H140"/><path d="M110 116 H140"/><path d="M110 146 H140"/>
               </g>
             </svg>
             <h3 class="mt-5 font-bold text-lg">External evidence</h3>
-            <p class="mt-2 text-sm text-gray-600">Cross‑checks with independent tests (e.g., CBC Marketplace) and expert guides.</p>
+            <p class="mt-2 text-sm text-gray-600">Cross-checks with independent tests (e.g., CBC Marketplace) and expert guides.</p>
           </div>
         </div>
+
+        <!-- Button now goes to a separate page -->
         <div class="mt-7 flex justify-center">
-          <a href="#method" class="inline-flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-2xl border hover:bg-gray-50">
-            <span>See full test method</span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M7 17L17 7M10 7h7v7"/></svg>
-          </a>
-        </div>
-      </div>
-        <div class="mt-6 flex justify-center">
-          <a href="https://kite-uhn.com/rmt/en/how-we-test" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-2xl border hover:bg-gray-50">
+          <a href="how-we-test.html" class="inline-flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-2xl border hover:bg-gray-50">
             <span>See full test method</span>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M7 17L17 7M10 7h7v7"/></svg>
           </a>
         </div>
       </div>
 
+      <!-- Category cards -->
       <div class="mt-10 grid gap-8 md:grid-cols-3">
         <!-- Casual -->
         <button onclick="showCategory('casual')" class="group text-left">
@@ -146,8 +109,7 @@
             <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
             <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Casual Footwear</h3>
             <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
-              <span class="font-bold">Ratings</span>
-              <span aria-hidden>→</span>
+              <span class="font-bold">Ratings</span><span aria-hidden>→</span>
             </div>
           </div>
         </button>
@@ -158,8 +120,7 @@
             <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
             <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Work Safety Footwear</h3>
             <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
-              <span class="font-bold">Ratings</span>
-              <span aria-hidden>→</span>
+              <span class="font-bold">Ratings</span><span aria-hidden>→</span>
             </div>
           </div>
         </button>
@@ -170,8 +131,7 @@
             <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
             <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Spikes</h3>
             <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
-              <span class="font-bold">Ratings</span>
-              <span aria-hidden>→</span>
+              <span class="font-bold">Ratings</span><span aria-hidden>→</span>
             </div>
           </div>
         </button>
@@ -186,7 +146,6 @@
         <h2 id="categoryTitle" class="text-3xl font-extrabold">Category</h2>
         <button onclick="closeCategory()" class="px-4 py-2 rounded-xl border font-semibold hover:bg-gray-50">← Back</button>
       </div>
-      <!-- Tabs injected here when a category has sub-groups -->
       <div id="groupTabs" class="mt-4 flex flex-wrap gap-2"></div>
       <ul id="shoeList" class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></ul>
     </div>
@@ -201,10 +160,7 @@
       <div class="mt-8 grid gap-6 md:grid-cols-3">
         <a href="https://www.cbc.ca/news/canada/marketplace-boot-test-1.6252613" target="_blank" rel="noopener" class="block rounded-2xl bg-white overflow-hidden shadow hover:shadow-lg transition">
           <div class="h-40 bg-gray-200 bg-cover bg-center" style="background-image:url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/logos/newsLogo_638215626098456151.png?v=638962568096370112')"></div>
-          <div class="p-6">
-            <h3 class="font-bold text-lg">CBC Marketplace: Winter Boot Grip Test</h3>
-            <p class="mt-2 text-sm text-gray-600">Independent ice‑traction testing across popular boots.</p>
-          </div>
+          <div class="p-6"><h3 class="font-bold text-lg">CBC Marketplace: Winter Boot Grip Test</h3><p class="mt-2 text-sm text-gray-600">Independent ice-traction testing across popular boots.</p></div>
         </a>
         <a href="https://www.youtube.com/watch?v=JhUk7qMtcjI&t=25s" target="_blank" rel="noopener" class="block rounded-2xl bg-white overflow-hidden shadow hover:shadow-lg transition">
           <div class="relative h-40 bg-gray-200 bg-cover bg-center" style="background-image:url('https://img.youtube.com/vi/JhUk7qMtcjI/hqdefault.jpg')">
@@ -215,17 +171,11 @@
               </div>
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="font-bold text-lg">Video: The Science of Walking on Ice</h3>
-            <p class="mt-2 text-sm text-gray-600">A quick explainer on slip mechanics and tread design.</p>
-          </div>
+          <div class="p-6"><h3 class="font-bold text-lg">Video: The Science of Walking on Ice</h3><p class="mt-2 text-sm text-gray-600">A quick explainer on slip mechanics and tread design.</p></div>
         </a>
         <a href="https://zoomer.com/health/2020/12/09/bring-on-the-snow-an-expert-guide-to-shopping-for-winter-boots" target="_blank" rel="noopener" class="block rounded-2xl bg-white overflow-hidden shadow hover:shadow-lg transition">
           <div class="h-40 bg-gray-200 bg-cover bg-center" style="background-image:url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Spike.jpeg')"></div>
-          <div class="p-6">
-            <h3 class="font-bold text-lg">Expert Guide: How to Shop for Winter Boots</h3>
-            <p class="mt-2 text-sm text-gray-600">Practical tips for warmth, grip, and comfort.</p>
-          </div>
+          <div class="p-6"><h3 class="font-bold text-lg">Expert Guide: How to Shop for Winter Boots</h3><p class="mt-2 text-sm text-gray-600">Practical tips for warmth, grip, and comfort.</p></div>
         </a>
       </div>
     </div>
@@ -235,130 +185,13 @@
   <section id="about" class="py-16">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl font-extrabold">About RateMyTreads</h2>
-      <p class="mt-4 text-gray-700">A simple, evidence‑informed hub that turns lab‑grade insights about ice traction and stability into clear footwear rankings you can use today.</p>
+      <p class="mt-4 text-gray-700">A simple, evidence-informed hub that turns lab-grade insights about ice traction and stability into clear footwear rankings you can use today.</p>
     </div>
   </section>
 
   <footer class="py-8 border-t text-center text-sm text-gray-500">
     <p>© <span id="year"></span> RateMyTreads</p>
   </footer>
-
-  <!-- HOW WE TEST: full-page section -->
-  <section id="method" class="py-16 bg-white">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex items-end justify-between gap-6">
-        <h2 class="text-3xl sm:text-4xl font-extrabold">How We Test</h2>
-        <a href="#ratings" class="text-sm font-semibold underline hover:no-underline">← Back to Ratings</a>
-      </div>
-
-      <!-- Overview -->
-      <div class="mt-10 grid gap-8 md:grid-cols-3">
-        <div class="md:col-span-2 rounded-3xl border p-6">
-          <h3 class="text-xl font-bold">Overview</h3>
-          <p class="mt-3 text-gray-700">We combine controlled evaluations with real‑world trials. Each pair is reviewed on traction, stability, and usable design factors (fit, warmth, water handling). Scores are normalized to a 0–20 traction index, then mapped to simple tiers using the legend below.</p>
-          <ul class="mt-4 grid gap-3 text-sm text-gray-700 list-disc ml-5">
-            <li><span class="font-semibold">Surface set:</span> smooth ice, packed snow, mixed winter sidewalks.</li>
-            <li><span class="font-semibold">Gait tasks:</span> level walk, heel strike, turn, stop.</li>
-            <li><span class="font-semibold">Design factors:</span> outsole rubber/compound, lug depth & pattern, optional studs or spikes.</li>
-          </ul>
-        </div>
-        <div class="rounded-3xl border p-6">
-          <h3 class="text-xl font-bold">Scoring</h3>
-          <ol class="mt-3 grid gap-3 text-sm text-gray-700 list-decimal ml-5">
-            <li>Record traction & slip events across tasks.</li>
-            <li>Weight by task difficulty; compute a 0–20 traction index.</li>
-            <li>Assign tier: Low, Medium, High, Very High.</li>
-          </ol>
-          <p class="mt-3 text-xs text-gray-500">Note: Spiked products may rate separately due to studded contact.</p>
-        </div>
-      </div>
-
-      <!-- LEGEND -->
-      <div class="mt-10 rounded-3xl border p-6">
-        <div class="flex items-center justify-between flex-wrap gap-6">
-          <h3 class="text-xl font-bold">Legend</h3>
-          <div class="text-sm text-gray-600">Traction Index → Tier</div>
-        </div>
-        <div class="mt-6 grid md:grid-cols-2 gap-8 items-center">
-          <!-- SVG legend with grid background and wedge bands -->
-          <div class="rounded-2xl border shadow-sm overflow-hidden">
-            <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
-              <!-- background grid -->
-              <defs>
-                <pattern id="grid" width="16" height="16" patternUnits="userSpaceOnUse">
-                  <path d="M16 0H0V16" fill="none" stroke="#e5e7eb" stroke-width="1"/>
-                </pattern>
-              </defs>
-              <rect x="0" y="0" width="640" height="360" fill="url(#grid)"/>
-              <!-- frame -->
-              <rect x="12" y="12" width="616" height="336" fill="none" stroke="#374151" stroke-width="6" rx="8"/>
-              <!-- wedges -->
-              <polygon points="40,320 600,320 600,290 40,320" fill="#dc2626"/>
-              <polygon points="40,320 600,320 600,250 40,300" fill="#f59e0b"/>
-              <polygon points="40,320 600,320 600,210 40,280" fill="#4ade80"/>
-              <polygon points="40,320 600,320 600,160 40,260" fill="#22c55e"/>
-              <!-- labels & snowflakes -->
-              <g font-family="system-ui,ui-sans-serif" font-weight="700" fill="#374151">
-                <text x="420" y="180" font-size="24">VERY HIGH (≥15)</text>
-                <text x="420" y="220" font-size="28" fill="#2563eb">❄❄❄</text>
-                <text x="420" y="250" font-size="24">HIGH (11–14)</text>
-                <text x="420" y="288" font-size="28" fill="#2563eb">❄❄</text>
-                <text x="420" y="318" font-size="24">MEDIUM (7–10)</text>
-                <text x="420" y="350" font-size="28" fill="#2563eb">❄</text>
-              </g>
-              <g font-family="system-ui,ui-sans-serif" font-weight="700" fill="#6b7280">
-                <text x="420" y="345" font-size="24">LOW (&lt;7)</text>
-              </g>
-            </svg>
-          </div>
-          <!-- textual bullets -->
-          <div>
-            <ul class="grid gap-4">
-              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-3 w-6 rounded-sm bg-[#22c55e]"></span><div><p class="font-semibold">Very High (≥15) — ❄❄❄</p><p class="text-sm text-gray-600">Confident traction on ice; strong stop/turn stability.</p></div></li>
-              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-3 w-6 rounded-sm bg-[#4ade80]"></span><div><p class="font-semibold">High (11–14) — ❄❄</p><p class="text-sm text-gray-600">Reliable grip in most winter sidewalk conditions.</p></div></li>
-              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-3 w-6 rounded-sm bg-[#f59e0b]"></span><div><p class="font-semibold">Medium (7–10) — ❄</p><p class="text-sm text-gray-600">Adequate for packed snow; cautious on smooth ice.</p></div></li>
-              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-3 w-6 rounded-sm bg-[#dc2626]"></span><div><p class="font-semibold">Low (&lt;7)</p><p class="text-sm text-gray-600">Limited traction; avoid smooth ice without aids.</p></div></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Equipment & protocol -->
-      <div class="mt-10 grid gap-8 md:grid-cols-2">
-        <div class="rounded-3xl border p-6">
-          <h3 class="text-xl font-bold">Equipment</h3>
-          <ul class="mt-3 list-disc ml-5 text-sm text-gray-700 grid gap-2">
-            <li>Ice/winter surface lane with temperature control</li>
-            <li>Harness for safety during slip trials</li>
-            <li>Task markers for walk / stop / turn cycles</li>
-          </ul>
-        </div>
-        <div class="rounded-3xl border p-6">
-          <h3 class="text-xl font-bold">Protocol</h3>
-          <ol class="mt-3 list-decimal ml-5 text-sm text-gray-700 grid gap-2">
-            <li>Warm‑up and sizing check</li>
-            <li>Sequence: walk → heel strike → turn → stop</li>
-            <li>Repeat runs; log slips and recoveries</li>
-          </ol>
-        </div>
-      </div>
-
-      <!-- FAQ -->
-      <div class="mt-10 rounded-3xl border p-6">
-        <h3 class="text-xl font-bold">FAQ</h3>
-        <div class="mt-4 grid gap-4 text-sm text-gray-700">
-          <details class="rounded-xl border p-4">
-            <summary class="font-semibold">Do spiked products use the same tiers?</summary>
-            <p class="mt-2">We report spikes separately when studs dominate contact, but we still convert to the same 0–20 traction index for comparison.</p>
-          </details>
-          <details class="rounded-xl border p-4">
-            <summary class="font-semibold">What else influences the score?</summary>
-            <p class="mt-2">Compound hardness, lug geometry, and temperature sensitivity all affect grip. Fit and insulation are noted but do not change the traction index.</p>
-          </details>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <script>
     // Data: replace/extend with your real inventory and images
@@ -400,7 +233,13 @@
       categoryTitle.textContent = cat.title;
       shoeList.innerHTML = '';
       cat.items.forEach((item) => {
-        const imgSrc = item.img || (key === 'work' ? 'assets/work.jpg' : key === 'spikes' ? 'assets/spikes.jpg' : 'assets/casual.jpg');
+        const fallback =
+          key === 'work'
+            ? 'https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Safety.jpeg'
+            : key === 'spikes'
+            ? 'https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Spike.jpeg'
+            : 'https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Casual.jpeg';
+        const imgSrc = item.img || fallback;
         const ratingText = (typeof item.rating === 'number') ? item.rating.toFixed(1) : '—';
         const li = document.createElement('li');
         li.className = 'rounded-2xl overflow-hidden border bg-white shadow hover:shadow-lg transition';
@@ -427,4 +266,3 @@
   </script>
 </body>
 </html>
-
