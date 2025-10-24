@@ -126,15 +126,35 @@
         </div>
       </div>
 
-      <!-- Category cards -->
-      <div class="mt-10 grid gap-8 md:grid-cols-3">
-        <button onclick="showCategory('casual')" class="group text-left">
-          <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 card-bg-casual bg-cover-center">
-            <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
-            <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Casual Footwear</h3>
-            <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between"><span class="font-bold">Ratings</span><span aria-hidden>→</span></div>
-          </div>
-        </button>
+ <!-- Casual with dropdown -->
+<div class="relative">
+  <button onclick="toggleCasualMenu(event)" class="group text-left w-full">
+    <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 card-bg-casual bg-cover-center">
+      <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
+      <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6 flex items-center gap-2">
+        Casual Footwear
+        <svg class="w-5 h-5 transition-transform group-hover:translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/>
+        </svg>
+      </h3>
+      <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
+        <span class="font-bold">Choose sub-category</span><span aria-hidden>▼</span>
+      </div>
+    </div>
+  </button>
+
+  <!-- Dropdown menu -->
+  <div id="casualMenu" class="hidden absolute left-0 top-full mt-2 w-56 rounded-xl border border-gray-200 bg-white shadow-lg z-40">
+    <button class="w-full text-left block px-4 py-2 hover:bg-gray-50 rounded-t-xl"
+            onclick="showCategory('casual','nonwinter'); closeCasualMenu();">
+      Non-winter
+    </button>
+    <button class="w-full text-left block px-4 py-2 hover:bg-gray-50 rounded-b-xl"
+            onclick="showCategory('casual','winter'); closeCasualMenu();">
+      Winter
+    </button>
+  </div>
+</div>
         <button onclick="showCategory('work')" class="group text-left">
           <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 card-bg-work bg-cover-center">
             <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
