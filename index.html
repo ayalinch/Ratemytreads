@@ -186,8 +186,14 @@
         <div id="shoeHero" class="h-64 bg-center bg-cover"></div>
         <div class="p-6 space-y-4">
           <h2 id="shoeName" class="text-2xl font-extrabold"></h2>
+          <div class="mt-1">
+  <span id="testedBadge"
+        class="hidden inline-flex items-center rounded-full bg-blue-50 text-blue-800 border border-blue-200 px-2.5 py-0.5 text-xs font-semibold">
+    <!-- Filled by JS -->
+  </span>
+</div>
           <div class="flex items-center gap-6 text-lg">
-            <div class="flex items-center gap-2">
+            <div ="flex items-center gap-2">
               <span class="text-sm font-semibold text-gray-600">Snow/Ice:</span>
               <span id="shoeSnow" class="text-blue-600 text-xl"></span>
             </div>
@@ -553,6 +559,20 @@
       const hero = item.img || FALLBACK[catKey];
       document.getElementById('shoeHero').style.backgroundImage = `url('${hero}')`;
       document.getElementById('shoeName').textContent = item.name;
+      const badgeEl = document.getElementById('testedBadge');
+if (badgeEl) {
+  const d = item.date ? new Date(item.date) : null;
+  if (d && !isNaN(d)) {
+    // format as YYYY-MM-DD (stable) — change to locale if you prefer
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth()+1).padStart(2,'0');
+    const dd = String(d.getDate()).padStart(2,'0');
+    badgeEl.textContent = `Tested: ${yyyy}-${mm}-${dd}`;
+    badgeEl.classList.remove('hidden');
+  } else {
+    badgeEl.classList.add('hidden');
+  }
+}
 
       const snow3 = flakes(item.snow || 0);
       document.getElementById('shoeSnow').textContent = snow3 ? '❄'.repeat(snow3) : '—';
