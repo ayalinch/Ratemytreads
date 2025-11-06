@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Winter Footwear Ratings - RateMyTreads</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .card-bg-casual { background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Casual.jpeg'); }
+    .card-bg-work   { background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Safety.jpeg'); }
+    .card-bg-spikes { background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Spike.jpeg'); }
+    .bg-cover-center { background-size: cover; background-position: center; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <!-- Header -->
+  <header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
+    <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+      <a href="index.html" class="text-xl font-black tracking-tight">RateMyTreads</a>
+      <div class="hidden sm:flex items-center gap-6 text-sm font-medium">
+        <!-- Ratings Dropdown -->
+        <div class="relative group">
+          <span class="flex items-center gap-1 cursor-pointer select-none h-16 px-0 hover:text-black/70">
+            Ratings
+            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </span>
+          <div class="absolute left-0 top-full mt-0 w-56 rounded-xl shadow-lg bg-white border border-gray-200 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 z-50">
+            <a href="winter-ratings.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-t-xl">Winter Footwear</a>
+            <a href="non-winter-ratings.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-b-xl">Non-Winter Footwear</a>
+          </div>
+        </div>
+        <!-- How We Test Dropdown -->
+        <div class="relative group">
+          <span class="flex items-center gap-1 cursor-default select-none h-16 px-0 hover:text-black/70">
+            How We Test
+            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </span>
+          <div class="absolute left-0 top-full mt-0 w-56 rounded-xl shadow-lg bg-white border border-gray-200 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 z-50">
+            <a href="how-we-test-non-winter.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-t-xl">Non-Winter Testing</a>
+            <a href="how-we-test.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-b-xl">Winter Footwear Testing</a>
+          </div>
+        </div>
+        <a href="#news" class="hover:text-black/70">News</a>
+        <a href="#about" class="hover:text-black/70">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="pt-24 pb-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-center mb-4">Winter Footwear Ratings</h1>
+      <p class="text-center text-gray-600 mb-12">Choose a category to explore winter footwear ratings and reviews.</p>
+      
+      <!-- Winter Category Cards -->
+      <div class="grid gap-8 md:grid-cols-3">
+        <button onclick="window.location.href='#casual'" class="group text-left">
+          <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 card-bg-casual bg-cover-center">
+            <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
+            <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Casual Winter Footwear</h3>
+            <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
+              <span class="font-bold">Ratings</span><span aria-hidden>→</span>
+            </div>
+          </div>
+        </button>
+        <button onclick="window.location.href='#work'" class="group text-left">
+          <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 card-bg-work bg-cover-center">
+            <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
+            <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Work Safety Footwear</h3>
+            <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
+              <span class="font-bold">Ratings</span><span aria-hidden>→</span>
+            </div>
+          </div>
+        </button>
+        <button onclick="window.location.href='#spikes'" class="group text-left">
+          <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 card-bg-spikes bg-cover-center">
+            <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
+            <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Spikes</h3>
+            <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
+              <span class="font-bold">Ratings</span><span aria-hidden>→</span>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#171717] text-gray-200 pt-12" id="site-footer">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <!-- Newsletter signup -->
+      <div class="grid gap-6 md:grid-cols-3 items-center pb-10 border-b border-white/10">
+        <div class="flex items-center gap-4">
+          <div class="shrink-0 rounded-md bg-white px-2 py-1">
+            <span class="block text-xs font-black tracking-wider text-gray-900">RATE MY</span>
+            <span class="block text-lg font-black tracking-tight text-gray-900 -mt-1">TREADS</span>
+          </div>
+          <div>
+            <h3 class="text-xl font-extrabold">Subscribe to our Mailing List</h3>
+            <p class="text-sm text-gray-400">Get updates when new footwear is tested.</p>
+          </div>
+        </div>
+
+        <form id="nlForm" class="md:col-span-2 flex flex-col sm:flex-row gap-3">
+          <input type="text" name="name" placeholder="Name" class="w-full sm:w-auto grow rounded-xl bg-white/10 border border-white/10 px-4 py-2.5 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white/30">
+          <input type="email" name="email" placeholder="Email" class="w-full sm:w-auto grow rounded-xl bg-white/10 border border-white/10 px-4 py-2.5 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white/30">
+          <button class="rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white font-semibold px-5 py-2.5">Subscribe</button>
+        </form>
+      </div>
+
+      <!-- Disclaimer -->
+      <p class="text-center text-sm sm:text-[15px] font-semibold text-gray-200/90 mt-8">
+        The information on this site is intended to be for informational purposes only and is not a substitute for professional advice.
+        UHN makes no representation or warranty about the suitability of any of the products advertised on this site for any particular consumer.
+        All boots are tested in new condition.
+      </p>
+
+      <!-- 3-column content -->
+      <div class="grid gap-10 md:grid-cols-3 mt-10">
+        <div>
+          <h4 class="font-bold text-lg mb-4">Contact Info</h4>
+          <dl class="space-y-2 text-sm">
+            <div><dt class="inline font-semibold">PHONE:</dt> <dd class="inline"> (416) 597-3422 x7227</dd></div>
+            <div><dt class="inline font-semibold">EMAIL:</dt> <dd class="inline"> ratemytreads@uhn.ca</dd></div>
+            <div><dt class="inline font-semibold">ADDRESS:</dt> <dd class="inline"> 550 University Ave, Toronto, ON</dd></div>
+            <div><dt class="inline font-semibold">WORKING DAYS / HOURS:</dt> <dd class="inline"> Mon–Fri / 9:00 AM – 5:00 PM</dd></div>
+          </dl>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-lg mb-4">KITE @ UHN</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a class="hover:text-white underline underline-offset-2 decoration-white/20" href="https://kite-uhn.com/" target="_blank" rel="noopener">About KITE</a></li>
+            <li><a class="hover:text-white underline underline-offset-2 decoration-white/20" href="https://kite-uhn.com/facilities" target="_blank" rel="noopener">Facilities</a></li>
+            <li><a class="hover:text-white underline underline-offset-2 decoration-white/20" href="https://kite-uhn.com/virtual-tour" target="_blank" rel="noopener">Virtual Tour</a></li>
+            <li><a class="hover:text-white underline underline-offset-2 decoration-white/20" href="https://kite-uhn.com/news" target="_blank" rel="noopener">News</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom strip -->
+      <div class="mt-12 border-t border-white/10">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center justify-center rounded-full bg-rose-600/90 w-8 h-8">🍁</span>
+            <span class="text-sm text-gray-300">UHN • KITE Research Institute</span>
+          </div>
+          <p class="text-sm text-gray-400">Copyright © <span id="year"></span> KITE. All rights reserved.</p>
+          <div class="flex items-center gap-4 text-gray-300">
+            <a class="hover:text-white" aria-label="Facebook" href="#" target="_blank" rel="noopener">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.7-1.6 1.5V12h2.7l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg>
+            </a>
+            <a class="hover:text-white" aria-label="Twitter" href="#" target="_blank" rel="noopener">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.8c-.7.3-1.5.6-2.3.7.8-.5 1.4-1.3 1.7-2.2-.8.5-1.7.9-2.6 1.1A3.9 3.9 0 0 0 12 8.9c0 .3 0 .6.1.9-3.3-.2-6.3-1.8-8.3-4.2-.3.6-.5 1.3-.5 2 0 1.4.7 2.6 1.8 3.3-.6 0-1.2-.2-1.7-.5v.1c0 2 1.5 3.6 3.4 3.9-.4.1-.8.1-1.2.1-.3 0-.6 0-.8-.1.6 1.8 2.3 3.1 4.3 3.2A7.9 7.9 0 0 1 2 19.5 11.2 11.2 0 0 0 8.1 21c7.5 0 11.6-6.2 11.6-11.6v-.5c.8-.6 1.4-1.3 1.9-2.1z"/></svg>
+            </a>
+            <a class="hover:text-white" aria-label="LinkedIn" href="#" target="_blank" rel="noopener">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.9 3.9 6 2.5 6S0 4.9 0 3.5 1.1 1 2.5 1s2.48 1.1 2.48 2.5zM.5 8h4V23h-4V8zM8 8h3.8v2.1h.1c.5-1 1.9-2.1 3.9-2.1 4.2 0 5 2.7 5 6.1V23h-4v-6.7c0-1.6 0-3.6-2.2-3.6s-2.5 1.7-2.5 3.5V23H8V8z"/></svg>
+            </a>
+            <a class="hover:text-white" aria-label="YouTube" href="#" target="_blank" rel="noopener">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2c-.3-1.1-1.2-2-2.3-2.3C19.3 3.5 12 3.5 12 3.5s-7.3 0-9.2.4C1.7 4.2.8 5.1.5 6.2.1 8 .1 12 .1 12s0 4 .4 5.8c.3 1.1 1.2 2 2.3 2.3 1.9.4 9.2.4 9.2.4s7.3 0 9.2-.4c1.1-.3 2-1.2 2.3-2.3.4-1.8.4-5.8.4-5.8s0-4-.4-5.8zM9.8 15.5v-7l6.1 3.5-6.1 3.5z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('nlForm')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const fd = new FormData(e.target);
+        alert(`Thanks, ${fd.get('name')||'friend'}! We'll keep you posted at ${fd.get('email')||'your email'}.`);
+        e.target.reset();
+      });
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </footer>
+</body>
+</html>
