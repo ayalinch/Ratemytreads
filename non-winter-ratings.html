@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Non-Winter Footwear Ratings - RateMyTreads</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <!-- Header (same as winter-ratings.html) -->
+  <header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <div>
+          <a href="index.html" class="text-2xl font-extrabold text-gray-800">RateMyTreads</a>
+        </div>
+        <nav class="hidden md:flex space-x-10">
+          <a href="index.html#winter-ratings" class="text-gray-600 hover:text-gray-800 transition">Winter Ratings</a>
+          <a href="index.html#non-winter-ratings" class="text-gray-600 hover:text-gray-800 transition">Non-Winter Ratings</a>
+          <a href="index.html#about" class="text-gray-600 hover:text-gray-800 transition">About</a>
+          <a href="index.html#contact" class="text-gray-600 hover:text-gray-800 transition">Contact</a>
+        </nav>
+        <div class="md:hidden">
+          <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-800 transition">
+            <!-- Mobile menu button SVG -->
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="pt-24 pb-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-center mb-4">Non-Winter Footwear Ratings</h1>
+      <p class="text-center text-gray-600 mb-12">Choose a category to explore non-winter footwear ratings and reviews.</p>
+      
+      <!-- Non-Winter Category Cards -->
+      <div class="grid gap-8 md:grid-cols-2">
+        <button onclick="window.location.href='index.html#non-winter-casual'" class="group text-left">
+          <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 bg-cover-center"
+               style="background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/leaking-washing-machine-at-home.jpg')">
+            <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
+            <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Casual Footwear</h3>
+            <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
+              <span class="font-bold">Ratings</span><span aria-hidden>→</span>
+            </div>
+          </div>
+        </button>
+        <button onclick="window.location.href='index.html#non-winter-safety'" class="group text-left">
+          <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 bg-cover-center"
+               style="background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/close-up-of-workers-muddy-boots.jpg')">
+            <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
+            <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Safety Footwear</h3>
+            <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
+              <span class="font-bold">Ratings</span><span aria-hidden>→</span>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#171717] text-gray-200 pt-12" id="site-footer">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="border-t border-gray-800 pt-8 pb-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div>
+            <h2 class="text-lg font-bold mb-4">About Us</h2>
+            <p class="text-gray-400">RateMyTreads is dedicated to providing honest and comprehensive ratings for all types of footwear. Our mission is to help you find the perfect pair of shoes for any occasion.</p>
+          </div>
+          <div>
+            <h2 class="text-lg font-bold mb-4">Contact Us</h2>
+            <p class="text-gray-400">Have questions or feedback? We'd love to hear from you! Reach out to us at <a href="mailto:support@ratemytreads.com" class="text-gray-200 underline">support@ratemytreads.com</a>.</p>
+          </div>
+        </div>
+        <div class="mt-8 text-center">
+          <p class="text-gray-400 text-sm">&copy; 2023 RateMyTreads. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
