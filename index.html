@@ -44,6 +44,17 @@
         filter: blur(8px) brightness(0.7);
       }
     }
+
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    .animate-pulse-slow {
+      animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    .delay-100 { animation-delay: 100ms; }
+    .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; }
   </style>
 </head>
 
@@ -54,7 +65,20 @@
     <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
       <a href="index.html" class="text-xl font-black tracking-tight">RateMyTreads</a>
       <div class="hidden sm:flex items-center gap-6 text-sm font-medium">
-        <a href="index.html" class="hover:text-black/70">Ratings</a>
+        <!-- Ratings Dropdown Start -->
+        <div class="relative group">
+          <span class="flex items-center gap-1 cursor-pointer select-none h-16 px-0 hover:text-black/70">
+            Ratings
+            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </span>
+          <div class="absolute left-0 top-full mt-0 w-56 rounded-xl shadow-lg bg-white border border-gray-200 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 z-50">
+  <a href="winter-ratings.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-t-xl">Winter Footwear</a>
+  <a href="non-winter-ratings.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-b-xl">Non-Winter Footwear</a>
+</div>
+        </div>
+        <!-- Ratings Dropdown End -->
           <!-- Dropdown Start -->
           <div class="relative group">
             <span class="flex items-center gap-1 cursor-default select-none h-16 px-0 hover:text-black/70">
@@ -126,33 +150,92 @@
         </div>
       </div>
 
-      <!-- Category cards -->
-      <div class="mt-10 grid gap-8 md:grid-cols-3">
-        <button onclick="showCategory('casual')" class="group text-left">
-          <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 card-bg-casual bg-cover-center">
-            <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
-            <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Casual Footwear</h3>
-            <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between"><span class="font-bold">Ratings</span><span aria-hidden>→</span></div>
-          </div>
-        </button>
-        <button onclick="showCategory('work')" class="group text-left">
-          <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 card-bg-work bg-cover-center">
-            <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
-            <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Work Safety Footwear</h3>
-            <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between"><span class="font-bold">Ratings</span><span aria-hidden>→</span></div>
-          </div>
-        </button>
-        <button onclick="showCategory('spikes')" class="group text-left">
-          <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 card-bg-spikes bg-cover-center">
-            <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
-            <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Spikes</h3>
-            <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between"><span class="font-bold">Ratings</span><span aria-hidden>→</span></div>
-          </div>
-        </button>
+  <!-- Category cards -->
+      <div class="mt-10">
+        <!-- Winter Footwear Section -->
+        <h3 class="text-2xl font-bold mb-6">Winter Footwear</h3>
+        <div class="grid gap-8 md:grid-cols-3 mb-16">
+          <button onclick="showCategory('casual')" class="group text-left">
+            <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 card-bg-casual bg-cover-center">
+              <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
+              <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Casual Winter Footwear</h3>
+              <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
+                <span class="font-bold">Ratings</span><span aria-hidden>→</span>
+              </div>
+            </div>
+          </button>
+          <button onclick="showCategory('work')" class="group text-left">
+            <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 card-bg-work bg-cover-center">
+              <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
+              <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Work Safety Footwear</h3>
+              <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
+                <span class="font-bold">Ratings</span><span aria-hidden>→</span>
+              </div>
+            </div>
+          </button>
+          <button onclick="showCategory('spikes')" class="group text-left">
+            <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 card-bg-spikes bg-cover-center">
+              <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
+              <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Spikes</h3>
+              <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
+                <span class="font-bold">Ratings</span><span aria-hidden>→</span>
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <!-- Non-Winter Footwear Section -->
+        <h3 class="text-2xl font-bold mb-6 mt-12">Non-Winter Footwear</h3>
+        <div class="grid gap-8 md:grid-cols-3 mb-16">
+          <button onclick="showCategory('non-winter-casual')" class="group text-left">
+            <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 bg-cover-center"
+                 style="background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/leaking-washing-machine-at-home.jpg')">
+              <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
+              <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Casual Footwear</h3>
+              <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
+                <span class="font-bold">Ratings</span><span aria-hidden>→</span>
+              </div>
+            </div>
+          </button>
+          <button onclick="showCategory('non-winter-safety')" class="group text-left">
+            <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 bg-cover-center"
+                 style="background-image: url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/close-up-of-workers-muddy-boots.jpg')">
+              <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
+              <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Safety Footwear</h3>
+              <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
+                <span class="font-bold">Ratings</span><span aria-hidden>→</span>
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <!-- Newly Tested Items -->
+        <h4 class="text-xl font-semibold mb-6">Newly Tested Items</h4>
+        <div class="grid gap-8 md:grid-cols-2">
+          <a href="shoe-nike-pegasus-39-shield.html" class="group text-left block">
+            <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 bg-cover-center" 
+                 style="background-image: url('https://i.ebayimg.com/images/g/ib4AAOSw3gJjYOWN/s-l1200.png')">
+              <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
+              <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Nike Pegasus 39 Shield</h3>
+              <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
+                <span class="font-bold">Details</span><span aria-hidden>→</span>
+              </div>
+            </div>
+          </a>
+          <a href="shoe-sorel-cumberland.html" class="group text-left block">
+            <div class="relative h-60 rounded-3xl overflow-hidden shadow-xl bg-gray-200 bg-cover-center" 
+                 style="background-image: url('https://shoeclub.com/cdn/shop/products/NL3480-010_1.jpg?v=1606796636')">
+              <div class="absolute inset-0 bg-black/40 transition group-hover:bg-black/30"></div>
+              <h3 class="absolute inset-x-0 top-5 text-white text-3xl font-extrabold px-6">Sorel Cumberland</h3>
+              <div class="absolute inset-x-0 bottom-0 bg-white py-4 px-6 flex items-center justify-between">
+                <span class="font-bold">Details</span><span aria-hidden>→</span>
+              </div>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
   </section>
-
   <!-- Category List View -->
   <section id="categoryView" class="hidden py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -167,6 +250,7 @@
             <option value="best">Sort: Snow (high→low)</option>
             <option value="new">Sort: Newest tested</option>
             <option value="az">Sort: A→Z</option>
+            <option value="Winter Shoes">Sort: Winter Shoes</option>
           </select>
           <button onclick="closeCategory()" class="px-4 py-2 rounded-xl border font-semibold hover:bg-gray-50">← Back</button>
         </div>
@@ -186,8 +270,14 @@
         <div id="shoeHero" class="h-64 bg-center bg-cover"></div>
         <div class="p-6 space-y-4">
           <h2 id="shoeName" class="text-2xl font-extrabold"></h2>
+          <div class="mt-1">
+  <span id="testedBadge"
+        class="hidden inline-flex items-center rounded-full bg-blue-50 text-blue-800 border border-blue-200 px-2.5 py-0.5 text-xs font-semibold">
+    <!-- Filled by JS -->
+  </span>
+</div>
           <div class="flex items-center gap-6 text-lg">
-            <div class="flex items-center gap-2">
+            <div ="flex items-center gap-2">
               <span class="text-sm font-semibold text-gray-600">Snow/Ice:</span>
               <span id="shoeSnow" class="text-blue-600 text-xl"></span>
             </div>
@@ -228,6 +318,68 @@
           <div class="h-40 bg-gray-200 bg-cover bg-center" style="background-image:url('https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/Spike.jpeg')"></div>
           <div class="p-6"><h3 class="font-bold text-lg">Expert Guide: How to Shop for Winter Boots</h3><p class="mt-2 text-sm text-gray-600">Practical tips for warmth, grip, and comfort.</p></div>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WinterLab Photos Grid -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-center mb-2">WinterLab Photos</h2>
+      <p class="text-center text-gray-600 mb-12">Behind the scenes at our testing facility</p>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="relative group overflow-hidden rounded-2xl aspect-square">
+          <img src="https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/musaic01.jpg" 
+               alt="WinterLab testing facility" 
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-b from-black/0 to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
+        <div class="relative group overflow-hidden rounded-2xl aspect-square animate-pulse-slow">
+          <img src="https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/musaic02.jpg" 
+               alt="WinterLab testing facility" 
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-b from-black/0 to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
+        <div class="relative group overflow-hidden rounded-2xl aspect-square">
+          <img src="https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/musaic03.jpg" 
+               alt="WinterLab testing facility" 
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-b from-black/0 to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
+        <div class="relative group overflow-hidden rounded-2xl aspect-square animate-pulse-slow delay-200">
+          <img src="https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/musaic04.jpg" 
+               alt="WinterLab testing facility" 
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-b from-black/0 to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
+        <div class="relative group overflow-hidden rounded-2xl aspect-square animate-pulse-slow delay-300">
+          <img src="https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/musaic05.jpg" 
+               alt="WinterLab testing facility" 
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-b from-black/0 to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
+        <div class="relative group overflow-hidden rounded-2xl aspect-square">
+          <img src="https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/musaic06.jpg" 
+               alt="WinterLab testing facility" 
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-b from-black/0 to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
+        <div class="relative group overflow-hidden rounded-2xl aspect-square animate-pulse-slow delay-100">
+          <img src="https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/musaic07.jpg" 
+               alt="WinterLab testing facility" 
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-b from-black/0 to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
+        <!-- Empty div to balance grid on larger screens -->
+        <div class="hidden md:block relative group overflow-hidden rounded-2xl aspect-square bg-gray-100">
+          <div class="absolute inset-0 flex items-center justify-center text-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -346,6 +498,24 @@
     </script>
   </footer>
 
+  <!-- Find Your Shoe Button -->
+  <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
+    <button id="findShoeBtn" class="px-6 py-3 rounded-2xl bg-indigo-600 text-white font-bold shadow-lg hover:bg-indigo-500 transition">
+      Find Your Shoe
+    </button>
+  </div>
+
+  <!-- Find Your Shoe Modal -->
+  <div id="findShoeModal" class="fixed inset-0 z-50 bg-black/40 flex items-center justify-center hidden">
+    <div class="bg-white rounded-2xl shadow-xl max-w-lg w-full p-6 relative">
+      <button id="closeFindShoe" class="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl leading-none">&times;</button>
+      <h2 class="text-2xl font-extrabold mb-2 text-center">Find Your Shoe</h2>
+      <input id="findShoeInput" type="search" placeholder="Enter brand or model..." class="w-full border rounded-xl px-4 py-2 mb-4 text-lg" autofocus>
+      <ul id="findShoeResults" class="space-y-2"></ul>
+      <p id="findShoeNoResults" class="text-center text-gray-500 mt-4 hidden">No matching shoes found.</p>
+    </div>
+  </div>
+
   <script>
     // ---------------- Helpers ----------------
     const FALLBACK = {
@@ -406,36 +576,45 @@
       casual: {
         title: 'Casual Footwear',
         items: [
-          { slug:'kodiak-klondike-kids', name:'Kodiak Klondike (Kids)', brand:'Kodiak', style:'823004UEC', snow:6, date:'2016-12-20', img:'' },
-          { slug:'adidas-climawarm-choleah', name:'Adidas Climawarm Choleah Padded', brand:'Adidas', style:'AQ2024', snow:0, date:'2017-02-17', img:'' },
-          { slug:'baffin-telluride', name:'Baffin Telluride', brand:'Baffin', style:'4510-0185-001', snow:3, date:'2016-11-15', img:'' },
-          { slug:'baffin-urba', name:'Baffin URBA', brand:'Baffin', style:'URBA-W022', snow:9, date:'2021-09-10', img:'' },
-          { slug:'clarks-desert-boot', name:'Clarks Desert Casual Boots', brand:'Clarks', style:'26111496', snow:5, date:'2017-02-17', img:'' },
-          { slug:'columbia-ice-maiden-slip', name:'Columbia Ice Maiden II Slip', brand:'Columbia', style:'1554181', snow:1, date:'2016-12-07', img:'' },
-          { slug:'crocs-lodgepoint', name:'Crocs Lodgepoint Lace', brand:'Crocs', style:'203423-001', snow:5, date:'2017-02-16', img:'' },
-          { slug:'keen-revel-iv-mid-polar-magnet', name:'KEEN Revel IV Mid Polar (Magnet/North A)', brand:'KEEN', style:'1023629', snow:10, date:'2020-12-18', img:'' },
-          { slug:'keen-revel-iv-mid-polar-black', name:'KEEN Revel IV Mid Polar (Black/Harbor)', brand:'KEEN', style:'1023631', snow:10, date:'2020-12-18', img:'' },
-          { slug:'merrell-thermo-adventure-iceplus-6wp', name:'Merrell Thermo Adventure ICE+ 6” WP', brand:'Merrell', style:'J06096', snow:6, date:'2018-11-20', img:'' },
-          { slug:'merrell-icepack-moc-polar-wp', name:'Merrell Icepack MOC Polar WP', brand:'Merrell', style:'J32902', snow:9, date:'2018-11-08', img:'' },
-          { slug:'sorel-cumberland', name:'Sorel Cumberland', brand:'Sorel', style:'1129351969', snow:0, date:'2017-02-17', img: WIKI.Sorel },
-          { slug:'ugg-adirondack-iii', name:'Ugg Adirondack Boot III', brand:'Ugg', style:'1095141', snow:2, date:'2022-09-02', img:'' },
-          { slug:'windriver-peak-icefx-hikers', name:'WindRiver Peak ICEFX Winter Hikers', brand:'WindRiver', style:'5DQEWRFB8-5088', snow:8, date:'2019-08-12', img:'' },
-          { slug:'windriver-ice-queen-low-black', name:'WindRiver Ice Queen Low ICEFX (Black)', brand:'WindRiver', style:'5DQEWRFB23-5558', snow:10, date:'2025-01-13', img:'' }
+          { slug:'kodiak-klondike-kids', name:'Kodiak Klondike (Kids)', brand:'Kodiak', style:'823004UEC', snow:6, date:'2016-12-20', img:'https://www.kodiakboots.com/on/demandware.static/-/Sites-kodiak-master-catalog/default/dw2e5e7d7d/images/large/823004UEC-001_a1.jpg' },
+          { slug:'adidas-climawarm-choleah', name:'Adidas Climawarm Choleah Padded', brand:'Adidas', style:'AQ2024', snow:0, date:'2017-02-17', img:'https://assets.adidas.com/images/w_600,f_auto/q_auto/4e3e7e7e6e2b4e8b8e2bafc400e8e2b8_9366/Climawarm_Choleah_Padded_Boots_Black_AQ2024_01_standard.jpg' },
+          { slug:'baffin-telluride', name:'Baffin Telluride', brand:'Baffin', style:'4510-0185-001', snow:3, date:'2016-11-15', img:'https://baffin.com/cdn/shop/products/TELLURIDE-BLACK-4510-0185-001_1200x.jpg' },
+          { slug:'baffin-urba', name:'Baffin URBA', brand:'Baffin', style:'URBA-W022', snow:9, date:'2021-09-10', img:'https://baffin.com/cdn/shop/products/URBA-BLACK-URBA-W022-BK1_1200x.jpg' },
+          { slug:'clarks-desert-boot', name:'Clarks Desert Casual Boots', brand:'Clarks', style:'26111496', snow:5, date:'2017-02-17', img:'https://clarks.scene7.com/is/image/Pangaea2Build/26111496_W_1?wid=1200&hei=1200&fmt=jpeg&qlt=85,0&resMode=sharp2&op_usm=1.75,0.3,2,0' },
+          { slug:'columbia-ice-maiden-slip', name:'Columbia Ice Maiden II Slip', brand:'Columbia', style:'1554181', snow:1, date:'2016-12-07', img:'https://columbia.scene7.com/is/image/ColumbiaSportswear2/1554181_010_f?$x1_grid$' },
+          { slug:'crocs-lodgepoint', name:'Crocs Lodgepoint Lace', brand:'Crocs', style:'203423-001', snow:5, date:'2017-02-16', img:'https://www.crocs.ca/on/demandware.static/-/Sites-crocs_ca-Library/default/dw8e8e8e8e/images/large/203423_001_ALT100.jpg' },
+          { slug:'keen-revel-iv-mid-polar-magnet', name:'KEEN Revel IV Mid Polar (Magnet/North A)', brand:'KEEN', style:'1023629', snow:10, date:'2020-12-18', img:'https://cdn11.bigcommerce.com/s-1b7e6/images/stencil/1280x1280/products/101/1127/keen-revel-iv-mid-polar-magnet-north-atlantic-1023629__38238.1606848042.jpg' },
+          { slug:'keen-revel-iv-mid-polar-black', name:'KEEN Revel IV Mid Polar (Black/Harbor)', brand:'KEEN', style:'1023631', snow:10, date:'2020-12-18', img:'https://www.keenfootwear.com/dw/image/v2/BBTC_PRD/on/demandware.static/-/Sites-keen-master-catalog/default/dw2e2e2e2e/images/hi-res/1023631_1.jpg' },
+          { slug:'merrell-thermo-adventure-iceplus-6wp', name:'Merrell Thermo Adventure ICE+ 6” WP', brand:'Merrell', style:'J06096', snow:6, date:'2018-11-20', img:'https://www.merrell.com/on/demandware.static/-/Sites-merrell_us-Library/default/dw2e2e2e2e/images/large/J06096_1.jpg' },
+          { slug:'merrell-icepack-moc-polar-wp', name:'Merrell Icepack MOC Polar WP', brand:'Merrell', style:'J32902', snow:9, date:'2018-11-08', img:'https://www.merrell.com/on/demandware.static/-/Sites-merrell_us-Library/default/dw2e2e2e2e/images/large/J32902_1.jpg' },
+          { 
+            slug: 'sorel-cumberland',
+            name: 'Sorel Cumberland',
+            brand: 'Sorel',
+            style: '1129351969',
+            snow: 0,
+            date: '2017-02-17',
+            img: 'https://media.sorel.com/i/sorel/1869411_010_a9?w=768&h=806&fmt=auto',
+            link: 'shoe-sorel-cumberland.html'
+          },
+          { slug:'ugg-adirondack-iii', name:'Ugg Adirondack Boot III', brand:'Ugg', style:'1095141', snow:2, date:'2022-09-02', img:'https://www.ugg.com/dw/image/v2/BBTC_PRD/on/demandware.static/-/Sites-ugg-master-catalog/default/dw2e2e2e2e/images/hi-res/1095141-BLK_1.jpg' },
+          { slug:'windriver-peak-icefx-hikers', name:'WindRiver Peak ICEFX Winter Hikers', brand:'WindRiver', style:'5DQEWRFB8-5088', snow:8, date:'2019-08-12', img:'https://www.marks.com/on/demandware.static/-/Sites-marksca-catalog/default/dw2e2e2e2e/images/large/5DQEWRFB8-5088_1.jpg' },
+          { slug:'windriver-ice-queen-low-black', name:'WindRiver Ice Queen Low ICEFX (Black)', brand:'WindRiver', style:'5DQEWRFB23-5558', snow:10, date:'2025-01-13', img:'https://www.marks.com/on/demandware.static/-/Sites-marksca-catalog/default/dw2e2e2e2e/images/large/5DQEWRFB23-5558_1.jpg' }
         ]
       },
       work: {
         title: 'Work Safety Footwear',
         items: [
-          { slug:'dakota-womens-icefx-felt-pack', name:'Dakota Women’s ICEFX Felt Pack CTCP', brand:'Dakota', style:'5BOFDK7-8520', snow:11, date:'2025-10-14', img:'' },
-          { slug:'dakota-tod-ctcp', name:'Dakota Traction on Demand CTCP', brand:'Dakota', style:'5ANFDKW8-8912', snow:15, date:'2018-12-18', img:'' },
-          { slug:'windriver-blackcomb-black', name:'WindRiver Blackcomb Winter Boots (Black)', brand:'WindRiver', style:'5DQEWRFB20-5703', snow:6, date:'2023-02-22', img:'' },
-          { slug:'windriver-blackcomb-plum', name:'WindRiver Blackcomb Winter Boots (Plum)', brand:'WindRiver', style:'5DQEWRFB20-5704', snow:6, date:'2023-02-22', img:'' },
-          { slug:'keen-oakland-6-bison', name:'KEEN Oakland 6” (Bison)', brand:'KEEN', style:'1020082', snow:7, date:'2018-09-26', img:'' },
-          { slug:'wolverine-glacier-csa', name:'Wolverine Glacier CSA', brand:'Wolverine', style:'W19303', snow:8, date:'2017-04-04', img:'' },
-          { slug:'royer-revolt-40-8921', name:'ROYER Revolt -40', brand:'ROYER', style:'8921RTAG', snow:9, date:'2021-03-19', img:'' },
-          { slug:'helly-work-ctcp-8', name:'Helly Hansen Work 8" CTCP ICEFX', brand:'Helly Hansen', style:'HHF231104', snow:10, date:'2025-10-14', img:'' },
-          { slug:'helly-work-ctcp', name:'Helly Hansen CTCP Safety Boot', brand:'Helly Hansen', style:'HHF231102', snow:12, date:'2025-09-12', img:'' },
-          { slug:'timberland-boondock-91631', name:'Timberland BoonDock (2024)', brand:'Timberland', style:'91631', snow:0, date:'2024-01-09', img:'' }
+          { slug:'dakota-womens-icefx-felt-pack', name:'Dakota Women’s ICEFX Felt Pack CTCP', brand:'Dakota', style:'5BOFDK7-8520', snow:11, date:'2025-10-14', img:'https://www.marks.com/on/demandware.static/-/Sites-marksca-catalog/default/dw2e2e2e2e/images/large/5BOFDK7-8520_1.jpg' },
+          { slug:'dakota-tod-ctcp', name:'Dakota Traction on Demand CTCP', brand:'Dakota', style:'5ANFDKW8-8912', snow:15, date:'2018-12-18', img:'https://www.marks.com/on/demandware.static/-/Sites-marksca-catalog/default/dw2e2e2e2e/images/large/5ANFDKW8-8912_1.jpg' },
+          { slug:'windriver-blackcomb-black', name:'WindRiver Blackcomb Winter Boots (Black)', brand:'WindRiver', style:'5DQEWRFB20-5703', snow:6, date:'2023-02-22', img:'https://www.marks.com/on/demandware.static/-/Sites-marksca-catalog/default/dw2e2e2e2e/images/large/5DQEWRFB20-5703_1.jpg' },
+          { slug:'windriver-blackcomb-plum', name:'WindRiver Blackcomb Winter Boots (Plum)', brand:'WindRiver', style:'5DQEWRFB20-5704', snow:6, date:'2023-02-22', img:'https://www.marks.com/on/demandware.static/-/Sites-marksca-catalog/default/dw2e2e2e2e/images/large/5DQEWRFB20-5704_1.jpg' },
+          { slug:'keen-oakland-6-bison', name:'KEEN Oakland 6” (Bison)', brand:'KEEN', style:'1020082', snow:7, date:'2018-09-26', img:'https://www.keenfootwear.com/dw/image/v2/BBTC_PRD/on/demandware.static/-/Sites-keen-master-catalog/default/dw2e2e2e2e/images/hi-res/1020082_1.jpg' },
+          { slug:'wolverine-glacier-csa', name:'Wolverine Glacier CSA', brand:'Wolverine', style:'W19303', snow:8, date:'2017-04-04', img:'https://www.wolverine.com/on/demandware.static/-/Sites-wolverine_us-Library/default/dw2e2e2e2e/images/large/W19303_1.jpg' },
+          { slug:'royer-revolt-40-8921', name:'ROYER Revolt -40', brand:'ROYER', style:'8921RTAG', snow:9, date:'2021-03-19', img:'https://www.royer.com/media/catalog/product/cache/1/image/800x800/9df78eab33525d08d6e5fb8d27136e95/8/9/8921rtag_1.jpg' },
+          { slug:'helly-work-ctcp-8', name:'Helly Hansen Work 8" CTCP ICEFX', brand:'Helly Hansen', style:'HHF231104', snow:10, date:'2025-10-14', img:'https://www.hellyhansen.com/media/catalog/product/cache/1/image/800x800/9df78eab33525d08d6e5fb8d27136e95/h/h/hhf231104_1.jpg' },
+          { slug:'helly-work-ctcp', name:'Helly Hansen CTCP Safety Boot', brand:'Helly Hansen', style:'HHF231102', snow:12, date:'2025-09-12', img:'https://www.hellyhansen.com/media/catalog/product/cache/1/image/800x800/9df78eab33525d08d6e5fb8d27136e95/h/h/hhf231102_1.jpg' },
+          { slug:'timberland-boondock-91631', name:'Timberland BoonDock (2024)', brand:'Timberland', style:'91631', snow:0, date:'2024-01-09', img:'https://www.timberland.com/on/demandware.static/-/Sites-tbl-us-Library/default/dw2e2e2e2e/images/large/91631_1.jpg' }
         ]
       },
       spikes: {
@@ -444,6 +623,20 @@
           { slug:'windriver-yamnuska-tod', name:'WindRiver Yamnuska Traction on Demand', brand:'WindRiver', style:'5CPEWRF18-5261', snow:15, date:'2018-12-18', img:'' },
           { slug:'korkers-snowjack-pro', name:'Korkers / Icebug SnowJack Pro', brand:'Korkers/Icebug', style:'IB7520BK', snow:12, date:'2021-05-07', img:'' },
           { slug:'impacto-stabilicers', name:'Impacto STABILicers / Overshoes', brand:'Impacto', style:'GRIP800 / OA9300', snow:9, date:'2017-09-20', img:'' }
+        ]
+      },
+      "non-winter": {
+        title: 'Non-Winter Footwear',
+        items: [
+          {
+            slug: 'nike-pegasus-39-shield',
+            name: 'Nike Air Zoom Pegasus 39 Shield',
+            brand: 'Nike',
+            style: 'DJ6111-001',
+            date: '2023-01-10',
+            img: 'https://kite-uhn-rmt.s3.ca-central-1.amazonaws.com/images/leaking-washing-machine-at-home.jpg',
+            link: 'shoe-nike-pegasus-39-shield.html'
+          }
         ]
       }
     };
@@ -503,21 +696,39 @@
       shoeList.innerHTML = '';
       items.forEach((item) => {
         const imgSrc = item.img || FALLBACK[currentCat];
-        const t = tierInfo(item.snow || 0); // <<< use tier colours
+        const t = tierInfo(item.snow || 0);
         const li = document.createElement('li');
         li.className = 'rounded-2xl overflow-hidden border bg-white shadow hover:shadow-lg transition cursor-pointer';
-        li.onclick = () => showShoe(currentCat, item.slug);
-        li.innerHTML = `
-          <div style="height:4px;background:${t.strip}"></div>
-          <div class="h-44 bg-gray-100 bg-cover bg-center" style="background-image:url('${imgSrc}')"></div>
-          <div class="p-4" style="background:${t.tint}; border-top:1px solid ${t.strip}33">
-            <h4 class="font-semibold text-lg">${item.name}</h4>
-            <p class="text-xs text-gray-500">${item.brand||''}${item.style?` • ${item.style}`:''}${item.date?` • ${fmtDate(item.date)}`:''}</p>
-            <div class="mt-2 flex items-center gap-2 text-sm">
-              <span class="font-semibold" style="color:${t.text}">${t.name}</span>
-              <span style="font-size:1.6rem;line-height:1;">${t.chip}</span>
-            </div>
-          </div>`;
+        // If the item has a .link property, use an <a> tag to link to the detail page
+        if (item.link) {
+          li.innerHTML = `
+            <a href="${item.link}" class="block focus:outline-none">
+              <div style="height:4px;background:${t.strip}"></div>
+              <div class="h-44 bg-gray-100 bg-cover bg-center" style="background-image:url('${imgSrc}')"></div>
+              <div class="p-4" style="background:${t.tint}; border-top:1px solid ${t.strip}33">
+                <h4 class="font-semibold text-lg">${item.name}</h4>
+                <p class="text-xs text-gray-500">${item.brand||''}${item.style?` • ${item.style}`:''}${item.date?` • ${fmtDate(item.date)}`:''}</p>
+                <div class="mt-2 flex items-center gap-2 text-sm">
+                  <span class="font-semibold" style="color:${t.text}">${t.name}</span>
+                  <span style="font-size:1.6rem;line-height:1;">${t.chip}</span>
+                </div>
+              </div>
+            </a>
+          `;
+        } else {
+          li.onclick = () => showShoe(currentCat, item.slug);
+          li.innerHTML = `
+            <div style="height:4px;background:${t.strip}"></div>
+            <div class="h-44 bg-gray-100 bg-cover bg-center" style="background-image:url('${imgSrc}')"></div>
+            <div class="p-4" style="background:${t.tint}; border-top:1px solid ${t.strip}33">
+              <h4 class="font-semibold text-lg">${item.name}</h4>
+              <p class="text-xs text-gray-500">${item.brand||''}${item.style?` • ${item.style}`:''}${item.date?` • ${fmtDate(item.date)}`:''}</p>
+              <div class="mt-2 flex items-center gap-2 text-sm">
+                <span class="font-semibold" style="color:${t.text}">${t.name}</span>
+                <span style="font-size:1.6rem;line-height:1;">${t.chip}</span>
+              </div>
+            </div>`;
+        }
         shoeList.appendChild(li);
       });
     }
@@ -541,6 +752,13 @@
     function showShoe(catKey, slug) {
       const item = getItem(catKey, slug);
       if (!item) return;
+      
+      // If item has a link property, navigate to that page
+      if (item.link) {
+        window.location.href = item.link;
+        return;
+      }
+
       const catTitle = DATA[catKey].title;
 
       document.getElementById('shoeBreadcrumb').innerHTML =
@@ -553,6 +771,20 @@
       const hero = item.img || FALLBACK[catKey];
       document.getElementById('shoeHero').style.backgroundImage = `url('${hero}')`;
       document.getElementById('shoeName').textContent = item.name;
+      const badgeEl = document.getElementById('testedBadge');
+if (badgeEl) {
+  const d = item.date ? new Date(item.date) : null;
+  if (d && !isNaN(d)) {
+    // format as YYYY-MM-DD (stable) — change to locale if you prefer
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth()+1).padStart(2,'0');
+    const dd = String(d.getDate()).padStart(2,'0');
+    badgeEl.textContent = `Tested: ${yyyy}-${mm}-${dd}`;
+    badgeEl.classList.remove('hidden');
+  } else {
+    badgeEl.classList.add('hidden');
+  }
+}
 
       const snow3 = flakes(item.snow || 0);
       document.getElementById('shoeSnow').textContent = snow3 ? '❄'.repeat(snow3) : '—';
@@ -586,6 +818,79 @@
       categoryView.classList.remove('hidden');
       window.location.hash = 'categoryView';
     }
+
+    // ===== Find Your Shoe Modal Logic =====
+    const findShoeBtn = document.getElementById('findShoeBtn');
+    const findShoeModal = document.getElementById('findShoeModal');
+    const closeFindShoe = document.getElementById('closeFindShoe');
+    const findShoeInput = document.getElementById('findShoeInput');
+    const findShoeResults = document.getElementById('findShoeResults');
+    const findShoeNoResults = document.getElementById('findShoeNoResults');
+
+    // Helper: flatten all shoes from casual & work
+    function getAllShoes() {
+      return [
+        ...DATA.casual.items.map(x => ({...x, cat: 'casual'})),
+        ...DATA.work.items.map(x => ({...x, cat: 'work'}))
+      ];
+    }
+
+    function showFindShoeModal() {
+      findShoeModal.classList.remove('hidden');
+      findShoeInput.value = '';
+      findShoeResults.innerHTML = '';
+      findShoeNoResults.classList.add('hidden');
+      setTimeout(() => findShoeInput.focus(), 100);
+    }
+
+    function hideFindShoeModal() {
+      findShoeModal.classList.add('hidden');
+    }
+
+    function renderFindShoeResults() {
+      const q = findShoeInput.value.trim().toLowerCase();
+      const allShoes = getAllShoes();
+      let matches = [];
+      if (q) {
+        matches = allShoes.filter(item =>
+          (item.name && item.name.toLowerCase().includes(q)) ||
+          (item.brand && item.brand.toLowerCase().includes(q))
+        );
+      }
+      findShoeResults.innerHTML = '';
+      if (matches.length) {
+        findShoeNoResults.classList.add('hidden');
+        matches.forEach(item => {
+          const li = document.createElement('li');
+          li.className = 'rounded-xl border bg-gray-50 hover:bg-indigo-50 cursor-pointer px-4 py-3 flex flex-col';
+          li.innerHTML = `
+            <span class="font-semibold">${item.name}</span>
+            <span class="text-xs text-gray-500">${item.brand || ''}${item.style ? ' • ' + item.style : ''}</span>
+            <span class="text-xs text-gray-400">${DATA[item.cat].title}</span>
+          `;
+          li.onclick = () => {
+            hideFindShoeModal();
+            showCategory(item.cat);
+            setTimeout(() => showShoe(item.cat, item.slug), 100);
+          };
+          findShoeResults.appendChild(li);
+        });
+      } else if (q) {
+        findShoeNoResults.classList.remove('hidden');
+      } else {
+        findShoeNoResults.classList.add('hidden');
+      }
+    }
+
+    findShoeBtn?.addEventListener('click', showFindShoeModal);
+    closeFindShoe?.addEventListener('click', hideFindShoeModal);
+    findShoeInput?.addEventListener('input', renderFindShoeResults);
+    findShoeModal?.addEventListener('click', e => {
+      if (e.target === findShoeModal) hideFindShoeModal();
+    });
+    findShoeInput?.addEventListener('keydown', e => {
+      if (e.key === 'Escape') hideFindShoeModal();
+    });
 
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
